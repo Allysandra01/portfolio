@@ -1,0 +1,207 @@
+{
+  "personal": {
+    "name": "Alex Chen",
+    "title": "Frontend Developer",
+    "email": "alex@example.com",
+    "location": "San Francisco, CA",
+    "resume": "",
+    "photo": "",
+    "bio": "I craft accessible, performant web experiences with modern frontend technologies. With over 5 years of experience, I specialize in building responsive interfaces that delight users and scale with the business. I'm passionate about design systems, TypeScript, and making the web accessible to everyone.",
+    "avatar": "",
+    "social": {
+      "github": "https://github.com/alexchen",
+      "linkedin": "https://linkedin.com/in/alexchen",
+      "twitter": "https://twitter.com/alexchen",
+      "dribbble": "https://dribbble.com/alexchen"
+    },
+    "stats": [
+      { "value": 5, "suffix": "+", "label": "Years Experience", "icon": "code" },
+      { "value": 30, "suffix": "+", "label": "Projects Delivered", "icon": "rocket" },
+      { "value": 15, "suffix": "+", "label": "Happy Clients", "icon": "users" },
+      { "value": 8, "suffix": "", "label": "Technologies", "icon": "layers" }
+    ]
+  },
+  "skills": [
+    {
+      "category": "Frontend",
+      "items": ["React", "TypeScript", "Next.js", "Vue", "CSS3", "HTML5", "Tailwind CSS", "Framer Motion"]
+    },
+    {
+      "category": "Languages",
+      "items": ["JavaScript", "TypeScript", "Python", "HTML", "CSS", "SQL", "GraphQL"]
+    },
+    {
+      "category": "Tools & Platforms",
+      "items": ["Git", "Vite", "Webpack", "ESLint", "Prettier", "Figma", "Storybook", "Docker"]
+    },
+    {
+      "category": "Testing & Quality",
+      "items": ["Vitest", "Jest", "React Testing Library", "Playwright", "Cypress", "Lighthouse"]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Senior Frontend Engineer",
+      "company": "TechCorp Inc.",
+      "period": "2022 \u2014 Present",
+      "location": "San Francisco, CA",
+      "achievements": [
+        "Led migration from JavaScript to TypeScript across 12 micro-frontends, reducing runtime errors by 40%",
+        "Designed and implemented a shared component library used by 5 engineering teams",
+        "Optimized Core Web Vitals, improving LCP by 35% and CLS by 50%",
+        "Mentored 4 junior engineers through structured pair programming and code reviews"
+      ],
+      "tech": ["React", "TypeScript", "Storybook", "CSS Modules", "Jest"]
+    },
+    {
+      "role": "Frontend Developer",
+      "company": "StartupXYZ",
+      "period": "2020 \u2014 2022",
+      "location": "Remote",
+      "achievements": [
+        "Built a real-time collaborative dashboard serving 10,000+ daily users",
+        "Migrated legacy jQuery codebase to React, reducing page load time by 60%",
+        "Implemented comprehensive E2E test suite with Cypress, achieving 90% coverage",
+        "Contributed to design system with accessible components (WCAG AA compliant)"
+      ],
+      "tech": ["React", "Redux", "Node.js", "Cypress", "Sass"]
+    },
+    {
+      "role": "Junior Frontend Developer",
+      "company": "WebAgency Co.",
+      "period": "2019 \u2014 2020",
+      "location": "New York, NY",
+      "achievements": [
+        "Developed responsive landing pages for 15+ client projects using Vue.js",
+        "Created reusable component patterns that reduced development time by 25%",
+        "Integrated REST APIs and third-party services with error handling and loading states"
+      ],
+      "tech": ["Vue", "JavaScript", "SCSS", "Webpack", "REST APIs"]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "role": "Engineering Manager, TechCorp",
+      "quote": "Alex is one of the most talented frontend engineers I've worked with. Their attention to detail, deep understanding of accessibility, and commitment to writing clean, maintainable code sets them apart from the rest.",
+      "avatar": ""
+    },
+    {
+      "name": "Marcus Williams",
+      "role": "CTO, StartupXYZ",
+      "quote": "The real-time dashboard Alex built for us handles thousands of concurrent users without breaking a sweat. A truly impressive piece of engineering that exceeded all our performance requirements.",
+      "avatar": ""
+    },
+    {
+      "name": "Emily Chen",
+      "role": "Product Designer, WebAgency Co.",
+      "quote": "Working with Alex was an absolute pleasure. They translated complex design concepts into pixel-perfect, accessible interfaces faster than anyone I've ever worked with. A true bridge between design and engineering.",
+      "avatar": ""
+    }
+  ],
+  "projects": [
+    {
+      "id": "project-1",
+      "title": "Analytics Dashboard",
+      "description": "Real-time analytics dashboard with interactive charts, data filtering, and export capabilities. Handles 50K+ data points with virtual scrolling.",
+      "longDescription": "A comprehensive analytics dashboard built for data-driven teams. Features include real-time data streaming via WebSockets, customizable widget layouts, CSV/PDF export, and role-based access control with granular permissions.",
+      "image": "",
+      "tags": ["React", "TypeScript", "D3.js", "WebSocket"],
+      "links": {
+        "demo": "https://analytics-demo.example.com",
+        "github": "https://github.com/alexchen/analytics-dashboard"
+      },
+      "featured": true
+    },
+    {
+      "id": "project-2",
+      "title": "E-Commerce Platform",
+      "description": "Full-featured e-commerce frontend with product search, cart management, and checkout flow. Optimized for conversion and accessibility.",
+      "longDescription": "A performant e-commerce frontend handling 10K+ products. Features include faceted search with Elasticsearch, real-time inventory management, wishlist functionality, and guest checkout with Stripe integration.",
+      "image": "",
+      "tags": ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
+      "links": {
+        "demo": "https://shop-demo.example.com",
+        "github": "https://github.com/alexchen/ecommerce-platform"
+      },
+      "featured": true
+    },
+    {
+      "id": "project-3",
+      "title": "Design System",
+      "description": "Comprehensive design system with 50+ accessible components, documentation, and Figma integration. Used by 200+ developers.",
+      "longDescription": "A scalable design system built with atomic design principles. Includes interactive Storybook documentation, comprehensive theming support, automated accessibility audits, and a Figma plugin for design-to-code handoff.",
+      "image": "",
+      "tags": ["React", "TypeScript", "Storybook", "Figma"],
+      "links": {
+        "demo": "https://design-system.example.com",
+        "github": "https://github.com/alexchen/design-system"
+      },
+      "featured": true
+    },
+    {
+      "id": "project-4",
+      "title": "Task Manager",
+      "description": "Kanban-style project management tool with drag-and-drop, real-time collaboration, and automated workflows.",
+      "longDescription": "A collaborative task management application inspired by Trello and Linear. Features include drag-and-drop card reordering, real-time updates via WebSockets, automated workflow triggers, and GitHub integration.",
+      "image": "",
+      "tags": ["Vue", "TypeScript", "Pinia", "WebSocket"],
+      "links": {
+        "demo": "https://tasks-demo.example.com",
+        "github": "https://github.com/alexchen/task-manager"
+      },
+      "featured": false
+    },
+    {
+      "id": "project-5",
+      "title": "Weather PWA",
+      "description": "Progressive web app with location-based weather forecasts, animated weather icons, and full offline support.",
+      "longDescription": "A progressive web app providing 7-day weather forecasts with geolocation-based detection, city search with autocomplete, beautiful animated weather icons, and full offline support via service workers.",
+      "image": "",
+      "tags": ["React", "PWA", "Service Worker", "Geolocation API"],
+      "links": {
+        "demo": "https://weather-demo.example.com",
+        "github": "https://github.com/alexchen/weather-app"
+      },
+      "featured": false
+    },
+    {
+      "id": "project-6",
+      "title": "Markdown Editor",
+      "description": "Real-time markdown editor with live preview, syntax highlighting, and export to HTML/PDF.",
+      "longDescription": "A feature-rich markdown editor with split-pane live preview, multiple custom syntax highlighting themes, auto-saving to localStorage, and export to HTML, PDF, and raw Markdown formats.",
+      "image": "",
+      "tags": ["Next.js", "TypeScript", "CodeMirror", "Pandoc"],
+      "links": {
+        "demo": "https://md-editor.example.com",
+        "github": "https://github.com/alexchen/markdown-editor"
+      },
+      "featured": false
+    },
+    {
+      "id": "project-7",
+      "title": "Portfolio CMS",
+      "description": "Headless CMS for managing portfolio content with markdown editing, image optimization, and drag-and-drop sections.",
+      "longDescription": "A custom headless CMS built for creative professionals. Features include visual page builder with drag-and-drop, automated image optimization pipeline, markdown editor with preview, and one-click deployment to Netlify or Vercel.",
+      "image": "",
+      "tags": ["React", "Node.js", "PostgreSQL", "AWS S3"],
+      "links": {
+        "demo": "https://cms-demo.example.com",
+        "github": "https://github.com/alexchen/portfolio-cms"
+      },
+      "featured": false
+    },
+    {
+      "id": "project-8",
+      "title": "Component CLI",
+      "description": "CLI tool for scaffolding React/TypeScript components with tests, stories, and documentation templates.",
+      "longDescription": "A developer productivity tool that generates boilerplate code for React components, including unit tests with Vitest, Storybook stories, JSDoc documentation, and CSS module files. Supports multiple templates and configurable output.",
+      "image": "",
+      "tags": ["Node.js", "CLI", "TypeScript", "Commander.js"],
+      "links": {
+        "github": "https://github.com/alexchen/component-generator"
+      },
+      "featured": false
+    }
+  ]
+}

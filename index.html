@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Alex Chen - Frontend Developer specializing in React, TypeScript, and modern CSS. Building accessible, performant web experiences.">
+  <meta name="theme-color" content="#2563eb">
+  <meta property="og:title" content="Alex Chen | Frontend Developer">
+  <meta property="og:description"
+    content="Building accessible, performant web experiences with React, TypeScript, and modern CSS.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alexchen.dev">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alex Chen | Frontend Developer">
+  <meta name="twitter:description"
+    content="Building accessible, performant web experiences with React, TypeScript, and modern CSS.">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563eb'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white' font-weight='bold' font-family='system-ui'>A</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+  <script type="application/ld+json" id="structured-data"></script>
+  <title>Allsandra Camacho | Frontend Developer</title>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+
+  <header class="header" id="header" role="banner">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="#" class="nav__logo" aria-label="Home">Alex Chen</a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+      </button>
+      <ul id="nav-menu" class="nav__list" role="list">
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#experience" class="nav__link">Experience</a></li>
+        <li><a href="#projects" class="nav__link">Projects</a></li>
+        <li><a href="#testimonials" class="nav__link">Testimonials</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+        <li><a href="#" class="nav__link" id="resume-link">Resume</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5" />
+              <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="hero__content container">
+        <p class="hero__badge" data-animate="fade-in" data-delay="100">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
+          </svg>
+          Frontend Developer
+        </p>
+        <h1 id="hero-title" class="hero__title" data-animate="fade-up" data-delay="200">
+          Building <span class="highlight">accessible</span>,<br>performant web experiences
+        </h1>
+        <p id="hero-description" class="hero__description" data-animate="fade-up" data-delay="300">
+          <span id="typewriter-text"></span><span class="cursor" aria-hidden="true"></span>
+        </p>
+        <div class="hero__actions" data-animate="fade-up" data-delay="400">
+          <a href="#projects" class="btn btn--primary">View Work</a>
+          <a href="#contact" class="btn btn--outline">Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero__scroll" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+        </svg>
+      </div>
+    </section>
+
+    <section id="about" class="section about" aria-labelledby="about-title">
+      <div class="container">
+        <header class="section__header" data-animate="fade-up">
+          <h2 id="about-title" class="section__title">About</h2>
+          <p class="section__subtitle">A bit about me and my toolkit</p>
+        </header>
+        <div class="about__grid">
+          <div class="about__bio" data-animate="slide-right">
+            <div class="about__avatar" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <p id="about-bio"></p>
+          </div>
+          <div class="about__skills" id="about-skills" data-animate="slide-left" role="list"
+            aria-label="Technical skills"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section experience section--alt" aria-labelledby="experience-title">
+      <div class="container">
+        <header class="section__header" data-animate="fade-up">
+          <h2 id="experience-title" class="section__title">Experience</h2>
+          <p class="section__subtitle">Professional journey</p>
+        </header>
+        <ol id="experience-timeline" class="timeline" aria-label="Work experience timeline"></ol>
+      </div>
+    </section>
+
+    <section id="stats" class="section stats" aria-labelledby="stats-title" aria-hidden="true">
+      <div class="container">
+        <header class="section__header" data-animate="fade-up">
+          <h2 id="stats-title" class="section__title">By the Numbers</h2>
+          <p class="section__subtitle">Metrics that matter</p>
+        </header>
+        <div id="stats-grid" class="stats__grid"></div>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects section--alt" aria-labelledby="projects-title">
+      <div class="container">
+        <header class="section__header" data-animate="fade-up">
+          <h2 id="projects-title" class="section__title">Projects</h2>
+          <p class="section__subtitle">Selected work</p>
+        </header>
+        <div id="project-filters" class="filters" role="group" aria-label="Filter projects by technology"
+          data-animate="fade-in"></div>
+        <div id="projects-grid" class="projects__grid" data-animate="fade-up" role="list" aria-label="Project showcase">
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <header class="section__header" data-animate="fade-up">
+          <h2 id="testimonials-title" class="section__title">Testimonials</h2>
+          <p class="section__subtitle">What people say</p>
+        </header>
+        <div id="testimonials-grid" class="testimonials__grid"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact section--alt" aria-labelledby="contact-title">
+      <div class="container">
+        <header class="section__header" data-animate="fade-up">
+          <h2 id="contact-title" class="section__title">Contact</h2>
+          <p class="section__subtitle">Let\'s work together</p>
+        </header>
+        <form class="contact-form" id="contact-form" action="https://formspree.io/f/your-id" method="POST"
+          data-animate="fade-up">
+          <div class="form__group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required minlength="2">
+            <p class="form__error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+              </svg>
+              Please enter your name
+            </p>
+          </div>
+          <div class="form__group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            <p class="form__error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+              </svg>
+              Please enter a valid email
+            </p>
+          </div>
+          <div class="form__group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required
+              minlength="10"></textarea>
+            <p class="form__error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="15" y1="9" x2="9" y2="15" />
+                <line x1="9" y1="9" x2="15" y2="15" />
+              </svg>
+              Message must be at least 10 characters
+            </p>
+          </div>
+          <div class="form__submit-wrap">
+            <button type="submit" class="btn btn--primary">
+              <span class="btn__text">Send Message</span>
+              <span class="form__spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="form__banner" id="form-banner" aria-live="polite"></div>
+        </form>
+        <div id="contact-social" class="contact__social" role="list" aria-label="Social links" data-animate="fade-up">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__content">
+      <p class="footer__copyright"></p>
+      <div class="footer__built-with">
+        <span>Built with</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          <path d="M2 17l10 5 10-5" />
+          <path d="M2 12l10 5 10-5" />
+        </svg>
+        <span>vanilla HTML, CSS &amp; JS</span>
+      </div>
+      <nav aria-label="Footer navigation">
+        <ul class="footer__links" role="list">
+          <li><a href="#" class="footer__link">Back to top</a></li>
+          <li><a href="#projects" class="footer__link">Projects</a></li>
+          <li><a href="#contact" class="footer__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/scroll-animations.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
