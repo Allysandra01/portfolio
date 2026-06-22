@@ -1,0 +1,26 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "script"
+  },
+  "globals": {
+    "ProjectRenderer": "readonly",
+    "initNavigation": "readonly",
+    "initScrollAnimations": "readonly",
+    "initHeroParallax": "readonly"
+  },
+  "rules": {
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^(initNavigation|initScrollAnimations|ProjectRenderer)$"
+      }
+    ],
+    "no-console": "off"
+  }
+}

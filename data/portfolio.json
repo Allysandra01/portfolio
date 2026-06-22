@@ -1,0 +1,145 @@
+{
+  "personal": {
+    "name": "Allsandra Camacho",
+    "title": "Frontend Developer",
+    "tagline": "Building accessible, performant web experiences with React, TypeScript, and modern CSS.",
+    "email": "hello@allsandra.dev",
+    "social": [
+      { "label": "GitHub", "url": "https://github.com/allsandra", "icon": "github" },
+      { "label": "LinkedIn", "url": "https://linkedin.com/in/allsandra", "icon": "linkedin" },
+      { "label": "Twitter", "url": "https://twitter.com/allsandra", "icon": "twitter" }
+    ],
+    "stats": [
+      { "label": "Years Experience", "value": 5, "suffix": "+" },
+      { "label": "Projects Delivered", "value": 30, "suffix": "+" },
+      { "label": "Happy Clients", "value": 15, "suffix": "+" },
+      { "label": "Technologies", "value": 8, "suffix": "+" }
+    ]
+  },
+  "about": {
+    "bio": "I'm a frontend developer passionate about crafting user interfaces that are both beautiful and accessible. I specialize in React, TypeScript, and modern CSS, with a keen eye for performance optimization and responsive design. I believe great software is built at the intersection of clean code and thoughtful UX.",
+    "skills": [
+      {
+        "category": "Frontend",
+        "items": ["React", "Next.js", "TypeScript", "HTML5", "CSS3"]
+      },
+      {
+        "category": "Styling",
+        "items": ["Tailwind CSS", "SASS", "CSS Modules", "Styled Components"]
+      },
+      {
+        "category": "Tools",
+        "items": ["Git", "VS Code", "Figma", "Vite", "Webpack"]
+      },
+      {
+        "category": "Testing",
+        "items": ["Jest", "React Testing Library", "Cypress"]
+      }
+    ]
+  },
+  "experience": [
+    {
+      "role": "Frontend Developer, GUI Editor & Layout Artist",
+      "company": "School and Organizations",
+      "period": "2024 — Present",
+      "description": "Working as a frontend developer, GUI editor, and layout artist for various projects within the school and affiliated organizations.",
+      "highlights": [
+        "Designed and implemented user-friendly web interfaces and layouts for organizational use",
+        "Created engaging graphic layouts and graphical user interfaces (GUI)"
+      ]
+    },
+    {
+      "role": "Trainee",
+      "company": "Department of Information and Communications Technology (DICT)",
+      "period": "2024 — Present",
+      "description": "Actively participating in various DICT training programs, both online and face-to-face, to enhance technical skills and stay updated with modern technologies.",
+      "highlights": [
+        "Completed comprehensive DICT training sessions covering modern tech stacks",
+        "Continuously engaging in ongoing training to further develop capabilities"
+      ]
+    },
+    {
+      "role": "Video Editor",
+      "company": "University Infomercial Contest",
+      "period": "University Days",
+      "description": "Led the video editing and post-production for an infomercial contest entry during university days.",
+      "highlights": [
+        "Won 1st Place in the university-wide Infomercial Contest",
+        "Managed the complete editing process, ensuring high-quality visual and audio presentation"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "E-Commerce Dashboard",
+      "description": "A real-time analytics dashboard for e-commerce businesses, featuring interactive charts, sales tracking, and inventory management.",
+      "tags": ["React", "TypeScript", "D3.js", "Tailwind CSS"],
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "#",
+      "repoUrl": "#",
+      "featured": true
+    },
+    {
+      "title": "Design System",
+      "description": "A comprehensive component library and design system built with React and Storybook, used across multiple products.",
+      "tags": ["React", "Storybook", "CSS Modules", "TypeScript"],
+      "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "#",
+      "repoUrl": "#",
+      "featured": true
+    },
+    {
+      "title": "Task Management App",
+      "description": "A collaborative project management tool with real-time updates, drag-and-drop boards, and team workspaces.",
+      "tags": ["Next.js", "TypeScript", "Prisma", "Tailwind CSS"],
+      "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "#",
+      "repoUrl": "#",
+      "featured": false
+    },
+    {
+      "title": "Weather Application",
+      "description": "A beautifully designed weather app with location-based forecasts, interactive maps, and severe weather alerts.",
+      "tags": ["React", "TypeScript", "Mapbox", "REST API"],
+      "image": "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "#",
+      "repoUrl": "#",
+      "featured": false
+    },
+    {
+      "title": "Portfolio Generator",
+      "description": "A tool that generates developer portfolios from JSON data, featuring multiple themes and responsive layouts.",
+      "tags": ["JavaScript", "HTML5", "CSS3", "Vite"],
+      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "#",
+      "repoUrl": "#",
+      "featured": false
+    },
+    {
+      "title": "Blog Platform",
+      "description": "A modern blogging platform with markdown support, syntax highlighting, and SEO optimization.",
+      "tags": ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "#",
+      "repoUrl": "#",
+      "featured": false
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Allsandra delivered an exceptional dashboard that transformed how our team views data. Her attention to accessibility and performance was outstanding.",
+      "author": "Sarah Mitchell",
+      "role": "CTO, TechCorp Solutions"
+    },
+    {
+      "quote": "Working with Allsandra was a pleasure. She brought our designs to life with pixel-perfect accuracy and suggested improvements we hadn't considered.",
+      "author": "James Park",
+      "role": "Founder, StartupXYZ"
+    },
+    {
+      "quote": "The component library Allsandra built has become the foundation of our entire product line. It saved us hundreds of hours of development time.",
+      "author": "Maria Garcia",
+      "role": "Lead Designer, WebAgency Pro"
+    }
+  ]
+}

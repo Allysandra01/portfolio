@@ -1,0 +1,22 @@
+{
+  "name": "myportfolio",
+  "version": "1.0.0",
+  "description": "Allsandra Camacho — Frontend Developer Portfolio",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve . -l 3000 -s",
+    "lint": "eslint js/",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "prettier": "^3.2.0",
+    "serve": "^14.2.0"
+  },
+  "keywords": [
+    "portfolio",
+    "frontend-developer"
+  ],
+  "license": "MIT"
+}
