@@ -235,18 +235,21 @@ function renderCollaborators(data) {
   grid.innerHTML = uploader +
     data.collaborators
       .map(
-        (collaborator) => `
+        (collaborator) => {
+          const name = collaborator.name || collaborator.initials || 'Collaborator';
+          return `
       <article class="collaborator-card" data-animate="fade-up">
         <div class="collaborator-card__photo">
-          <img src="${collaborator.image}" alt="${collaborator.name}" />
+          <img src="${collaborator.image}" alt="${name}" />
         </div>
         <div>
-          <h3 class="collaborator-card__name">${collaborator.name}</h3>
+          <h3 class="collaborator-card__name">${name}</h3>
           <p class="collaborator-card__role">${collaborator.role}</p>
           <p class="collaborator-card__note">${collaborator.note}</p>
         </div>
       </article>
-    `
+    `;
+        }
       )
       .join('');
 
