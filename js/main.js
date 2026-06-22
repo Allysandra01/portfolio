@@ -156,6 +156,38 @@ function getCollaboratorImageUrl(collaborator) {
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1C4D8D&color=fff&size=256&rounded=true`;
 }
 
+const PROJECT_SELECTION_THUMBNAILS = {
+  Poster: 'https://tse1.mm.bing.net/th/id/OIP.oYPjEwU_SeHkjwhOOOkT9AHaE8?pid=Api&P=0&h=180',
+  Infographics: 'https://tse3.mm.bing.net/th/id/OIP.nPJp_1Q65h1G5nYOkDYMOgHaEJ?pid=Api&P=0&h=180',
+  'FB Layout post': 'https://tse2.mm.bing.net/th/id/OIP.jd7HAZKVv-4M7N2GLQqpOQHaFO?pid=Api&P=0&h=180',
+  Template: 'https://tse4.mm.bing.net/th/id/OIP.TJ5eyPm7ijEO8m3aZoAlMQHaE8?pid=Api&P=0&h=180',
+  'Emerald Nebula Theme': 'https://tse1.mm.bing.net/th/id/OIP.UMUsd1WG93f8Es7GQhYBzwHaFi?pid=Api&P=0&h=180',
+  'Glassmorphic Dashboard': 'https://tse1.mm.bing.net/th/id/OIP.ke1bD26ZPjwmhurNczmFigHaE8?pid=Api&P=0&h=180',
+  'Gamified Dark Mode': 'https://tse2.mm.bing.net/th/id/OIP.S2HHSCfMJ0pmJkOAt61x1gHaE8?pid=Api&P=0&h=180',
+  'Minimalist Tech Portfolio': 'https://tse2.mm.bing.net/th/id/OIP.ij4UHvP7Fka8sMGCLqwpMQHaEF?pid=Api&P=0&h=180',
+  Funny: 'https://tse2.mm.bing.net/th/id/OIP.XenbpiWtkIADyTn4r44gMQHaEK?pid=Api&P=0&h=180',
+  Meme: 'https://tse3.mm.bing.net/th/id/OIP.zAVlwQ5Li_1FjYaSa0zjZAHaE8?pid=Api&P=0&h=180',
+  Cinematography: 'https://tse1.mm.bing.net/th/id/OIP.g_uHI2whr5Mp-UELG2hUfAHaEo?pid=Api&P=0&h=180',
+  'Music video': 'https://tse4.mm.bing.net/th/id/OIP.HPFWeJ5oWgJyn5N7uZj4-wHaEK?pid=Api&P=0&h=180',
+  'Small Projects': 'https://tse2.mm.bing.net/th/id/OIP.Rl1t5KX9n83rlViUKqieVAHaFj?pid=Api&P=0&h=180',
+  Vlog: 'https://tse2.mm.bing.net/th/id/OIP.pRjSzAVZNWZRsvBm_HeqjgHaFi?pid=Api&P=0&h=180',
+  Kpop: 'https://tse3.mm.bing.net/th/id/OIP.4BgvJcW8LnCzB3U3TL3XXwHaDp?pid=Api&P=0&h=180',
+  Tagalog: 'https://tse4.mm.bing.net/th/id/OIP.SvGT40YDMDrC96TsVEAh9QHaFS?pid=Api&P=0&h=180',
+  English: 'https://tse3.mm.bing.net/th/id/OIP._xWiw210mbiSeGGseiyTngHaGl?pid=Api&P=0&h=180',
+  Pop: 'https://tse1.mm.bing.net/th/id/OIP.E2n4-47-Eh83T0mzpcQGIwHaE8?pid=Api&P=0&h=180',
+  'R & B': 'https://tse4.mm.bing.net/th/id/OIP.NFLN1guIURPFTTmkMfBbSQHaEC?pid=Api&P=0&h=180',
+  Classical: 'https://tse3.mm.bing.net/th/id/OIP.JXTEwkXevj8uyvWxUhuvZQHaFi?pid=Api&P=0&h=180',
+  Ballad: 'https://tse2.mm.bing.net/th/id/OIP.NrYbs9hurY9_2X3bSyAaZgHaFQ?pid=Api&P=0&h=180',
+  'Creative Scripting': 'https://tse3.mm.bing.net/th/id/OIP.b9OyVJzx8L2ja3HELo081wHaE7?pid=Api&P=0&h=180',
+  'Concept Outlining': 'https://tse4.mm.bing.net/th/id/OIP.ItkzjcJSnL5BZtsYiBjANAHaEK?pid=Api&P=0&h=180',
+  'Game Lore Documentation': 'https://tse4.mm.bing.net/th/id/OIP.y0YJL6avWeAKQkMmXCnX4QHaE8?pid=Api&P=0&h=180',
+  'BrgyHub Template': 'https://tse4.mm.bing.net/th/id/OIP.gaeSIZhoC7cfmvPc1-L6IAHaEJ?pid=Api&P=0&h=180',
+  'Community Portal': 'https://tse1.mm.bing.net/th/id/OIP.Kl5RipTXm1HXU45Ii7e1UwHaE8?pid=Api&P=0&h=180',
+  'ScholarQuest Platform': 'https://tse1.mm.bing.net/th/id/OIP.eD_v4YvNWynrHE3BdiWPwwHaLH?pid=Api&P=0&h=180',
+  'Cross-Platform Mobile App': 'https://tse2.mm.bing.net/th/id/OIP.njg3e9gZyHg4TgC-GeOskgHaEK?pid=Api&P=0&h=180',
+  'Sentri-Fowl Controller UI': 'https://tse1.mm.bing.net/th/id/OIP.4rpOj6-i0iDBukSz1F9VogHaFR?pid=Api&P=0&h=180',
+};
+
 function renderProjectSelection(data) {
   const tabs = document.getElementById('project-selection-tabs');
   const options = document.getElementById('project-selection-options');
@@ -184,18 +216,18 @@ function renderProjectSelection(data) {
     selector.updateSubChoices();
     current.textContent = category;
     options.innerHTML = selector.subChoices
-      .map((choice) => `
-          <button type="button" class="project-selection__choice" data-choice="${choice}">
+      .map((choice) => {
+        const thumbnail = PROJECT_SELECTION_THUMBNAILS[choice] || PROJECT_SELECTION_THUMBNAILS[category] || 'https://via.placeholder.com/520x320?text=Project';
+        return `
+          <button type="button" class="project-selection__choice" data-choice="${choice}" aria-pressed="false">
+            <span class="project-selection__choice-media">
+              <img class="project-selection__choice-image" src="${thumbnail}" alt="${choice} project preview" />
+            </span>
             <span class="project-selection__choice-title">${choice}</span>
           </button>
-        `)
+        `;
+      })
       .join('');
-
-    tabs.querySelectorAll('.project-selection__tab').forEach((button, buttonIndex) => {
-      const selected = buttonIndex === index;
-      button.setAttribute('aria-selected', selected ? 'true' : 'false');
-      button.classList.toggle('project-selection__tab--active', selected);
-    });
   }
 
   showCategory(0);
@@ -209,8 +241,12 @@ function renderProjectSelection(data) {
   options.addEventListener('click', (event) => {
     const choiceButton = event.target.closest('.project-selection__choice');
     if (!choiceButton) return;
-    options.querySelectorAll('.project-selection__choice').forEach((btn) => btn.classList.remove('project-selection__choice--active'));
+    options.querySelectorAll('.project-selection__choice').forEach((btn) => {
+      btn.classList.remove('project-selection__choice--active');
+      btn.setAttribute('aria-pressed', 'false');
+    });
     choiceButton.classList.add('project-selection__choice--active');
+    choiceButton.setAttribute('aria-pressed', 'true');
   });
 }
 

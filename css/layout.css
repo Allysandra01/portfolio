@@ -1143,13 +1143,27 @@ body::after {
   pointer-events: none;
 }
 
+.project-selection__choice-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.project-selection__choice-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 .project-selection__choice-title {
   padding: var(--space-4);
   display: block;
   color: var(--text-primary);
   font-size: var(--text-base);
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .project-selection__choice:hover {
@@ -1719,6 +1733,11 @@ body::after {
 
   .project-selection__options {
     justify-content: flex-start;
+  }
+
+  .project-selection__choice {
+    min-width: 160px;
+    min-height: 220px;
   }
 
   .collaborators__grid,
