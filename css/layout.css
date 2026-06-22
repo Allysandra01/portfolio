@@ -1143,22 +1143,6 @@ body::after {
   pointer-events: none;
 }
 
-.project-selection__choice-media {
-  width: 100%;
-  min-height: 160px;
-  background: var(--bg-primary);
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-}
-
-.project-selection__choice-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform var(--transition-fast), filter var(--transition-fast);
-}
 
 .project-selection__choice-title {
   padding: var(--space-4);

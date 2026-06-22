@@ -156,14 +156,6 @@ function getCollaboratorImageUrl(collaborator) {
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1C4D8D&color=fff&size=256&rounded=true`;
 }
 
-function getProjectSelectionChoiceImage(choice, data) {
-  const projectImages = data.projects.map((project) => project.image).filter(Boolean);
-  const localFallback = ['./css/images/ally2.jpg', './css/images/allyyy.png'];
-  const imagePool = [...new Set([...projectImages, ...localFallback])];
-  const hash = [...choice].reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  return imagePool[hash % imagePool.length];
-}
-
 function renderProjectSelection(data) {
   const tabs = document.getElementById('project-selection-tabs');
   const options = document.getElementById('project-selection-options');
@@ -192,17 +184,11 @@ function renderProjectSelection(data) {
     selector.updateSubChoices();
     current.textContent = category;
     options.innerHTML = selector.subChoices
-      .map((choice) => {
-        const imageUrl = getProjectSelectionChoiceImage(choice, data);
-        return `
+      .map((choice) => `
           <button type="button" class="project-selection__choice" data-choice="${choice}">
-            <span class="project-selection__choice-media">
-              <img src="${imageUrl}" alt="${choice}" loading="lazy" />
-            </span>
             <span class="project-selection__choice-title">${choice}</span>
           </button>
-        `;
-      })
+        `)
       .join('');
 
     tabs.querySelectorAll('.project-selection__tab').forEach((button, buttonIndex) => {
