@@ -1028,10 +1028,15 @@ body::after {
   color: var(--text-primary);
   font-size: var(--text-sm);
   font-weight: 600;
-  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
 }
 
-.project-selection__tab[aria-selected='true'] {
+.project-selection__tab:hover {
+  transform: translateY(-1px);
+}
+
+.project-selection__tab[aria-selected='true'],
+.project-selection__tab.project-selection__tab--active {
   background: var(--color-primary);
   color: white;
   border-color: var(--color-primary);
@@ -1043,8 +1048,16 @@ body::after {
 }
 
 .project-selection__selected {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: white;
   font-size: var(--text-sm);
-  color: var(--text-secondary);
+  font-weight: 700;
+  width: fit-content;
 }
 
 .project-selection__options {

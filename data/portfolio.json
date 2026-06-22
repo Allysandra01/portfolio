@@ -147,25 +147,40 @@
       "name": "Mia Santos",
       "initials": "MS",
       "role": "Design Mentor",
-      "note": "Provided strategic guidance on visual hierarchy and accessibility across interface patterns."
+      "note": "Provided strategic guidance on visual hierarchy and accessibility across interface patterns.",
+      "image": "https://ui-avatars.com/api/?name=Mia+Santos&background=1C4D8D&color=fff&size=256"
     },
     {
       "name": "Carlos Reyes",
       "initials": "CR",
       "role": "Development Partner",
-      "note": "Collaborated on responsive layouts, performance tuning, and cross-browser polish."
+      "note": "Collaborated on responsive layouts, performance tuning, and cross-browser polish.",
+      "image": "https://ui-avatars.com/api/?name=Carlos+Reyes&background=1C4D8D&color=fff&size=256"
     },
     {
       "name": "Tasha Lim",
       "initials": "TL",
       "role": "Product Advisor",
-      "note": "Helped validate user flows and improve the overall experience for client handoff."
+      "note": "Helped validate user flows and improve the overall experience for client handoff.",
+      "image": "https://ui-avatars.com/api/?name=Tasha+Lim&background=1C4D8D&color=fff&size=256"
     },
     {
       "name": "Eric Tan",
       "initials": "ET",
       "role": "Accessibility Specialist",
-      "note": "Reviewed interactions and helped ensure screen reader clarity and keyboard support."
+      "note": "Reviewed interactions and helped ensure screen reader clarity and keyboard support.",
+      "image": "https://ui-avatars.com/api/?name=Eric+Tan&background=1C4D8D&color=fff&size=256"
     }
-  ]
+  ],
+  "projectSelection": {
+    "projects": {
+      "Layout Designing": ["Poster", "Infographics", "FB Layout post", "Template"],
+      "UI/UX Web": ["Emerald Nebula Theme", "Glassmorphic Dashboard", "Gamified Dark Mode", "Minimalist Tech Portfolio"],
+      "Video Editing": ["Funny", "Meme", "Cinematography", "Music video", "Small Projects", "Vlog"],
+      "Music Production": ["Kpop", "Tagalog", "English", "Pop", "R & B", "Classical", "Ballad"],
+      "Writing Story": ["Creative Scripting", "Concept Outlining", "Game Lore Documentation"],
+      "Web Development": ["BrgyHub Template", "Community Portal", "ScholarQuest Platform"],
+      "Application Development": ["Cross-Platform Mobile App", "Sentri-Fowl Controller UI"]
+    }
+  }
 }

@@ -108,6 +108,34 @@ function animateCounters() {
   document.querySelectorAll('.stat-card__value[data-count]').forEach((el) => observer.observe(el));
 }
 
+function projectSelector() {
+  return {
+    selectedCategory: '',
+    subChoices: [],
+    imageUrl: null,
+    projects: {},
+    updateSubChoices() {
+      if (this.selectedCategory) {
+        this.subChoices = this.projects[this.selectedCategory] || [];
+        const placeholder = document.getElementById('upload-placeholder');
+        if (placeholder) {
+          placeholder.style.display = this.imageUrl ? 'none' : 'block';
+        }
+      } else {
+        this.subChoices = [];
+      }
+    },
+    previewImage(event) {
+      const file = event.target.files?.[0];
+      if (file) {
+        this.imageUrl = URL.createObjectURL(file);
+        const placeholder = document.getElementById('upload-placeholder');
+        if (placeholder) placeholder.style.display = 'none';
+      }
+    },
+  };
+}
+
 function renderProjects(data) {
   const grid = document.getElementById('projects-grid');
   const filters = document.getElementById('project-filters');
@@ -126,14 +154,16 @@ function renderProjectSelection(data) {
   const current = document.getElementById('project-selection-current');
   if (!tabs || !options || !current || !data.projectSelection) return;
 
-  const categories = data.projectSelection.categories || [];
+  const selector = projectSelector();
+  selector.projects = data.projectSelection.projects;
+  const categories = Object.keys(selector.projects);
   if (!categories.length) return;
 
   tabs.innerHTML = categories
     .map(
       (category, index) => `
         <button class="project-selection__tab" type="button" role="tab" aria-selected="${index === 0}"
-          data-index="${index}">${category.name}</button>
+          data-index="${index}">${category}</button>
       `
     )
     .join('');
@@ -141,13 +171,18 @@ function renderProjectSelection(data) {
   function showCategory(index) {
     const category = categories[index];
     if (!category) return;
-    current.textContent = category.name;
-    options.innerHTML = category.choices
+
+    selector.selectedCategory = category;
+    selector.updateSubChoices();
+    current.textContent = category;
+    options.innerHTML = selector.subChoices
       .map((choice) => `<span class="project-selection__choice">${choice}</span>`)
       .join('');
 
     tabs.querySelectorAll('.project-selection__tab').forEach((button, buttonIndex) => {
-      button.setAttribute('aria-selected', buttonIndex === index ? 'true' : 'false');
+      const selected = buttonIndex === index;
+      button.setAttribute('aria-selected', selected ? 'true' : 'false');
+      button.classList.toggle('project-selection__tab--active', selected);
     });
   }
 
@@ -184,7 +219,7 @@ function renderCollaborators(data) {
   const uploader = `
       <article class="uploader-card" data-animate="fade-up">
         <div class="uploader-card__preview" id="collaborator-photo-preview" aria-hidden="true">
-          <span class="uploader-card__placeholder">+</span>
+          <span id="upload-placeholder" class="uploader-card__placeholder">+</span>
         </div>
         <div class="uploader-card__content">
           <h3 class="collaborator-card__name">Upload a photo</h3>
@@ -202,7 +237,9 @@ function renderCollaborators(data) {
       .map(
         (collaborator) => `
       <article class="collaborator-card" data-animate="fade-up">
-        <div class="collaborator-card__avatar" aria-hidden="true">${collaborator.initials}</div>
+        <div class="collaborator-card__photo">
+          <img src="${collaborator.image}" alt="${collaborator.name}" />
+        </div>
         <div>
           <h3 class="collaborator-card__name">${collaborator.name}</h3>
           <p class="collaborator-card__role">${collaborator.role}</p>
