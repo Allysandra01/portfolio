@@ -184,7 +184,9 @@ function renderProjectSelection(data) {
     selector.updateSubChoices();
     current.textContent = category;
     options.innerHTML = selector.subChoices
-      .map((choice) => `<span class="project-selection__choice">${choice}</span>`)
+      .map(
+        (choice) => `<button type="button" class="project-selection__choice" data-choice="${choice}">${choice}</button>`
+      )
       .join('');
 
     tabs.querySelectorAll('.project-selection__tab').forEach((button, buttonIndex) => {
@@ -200,6 +202,13 @@ function renderProjectSelection(data) {
     const button = event.target.closest('.project-selection__tab');
     if (!button) return;
     showCategory(Number(button.dataset.index));
+  });
+
+  options.addEventListener('click', (event) => {
+    const choiceButton = event.target.closest('.project-selection__choice');
+    if (!choiceButton) return;
+    options.querySelectorAll('.project-selection__choice').forEach((btn) => btn.classList.remove('project-selection__choice--active'));
+    choiceButton.classList.add('project-selection__choice--active');
   });
 }
 

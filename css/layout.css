@@ -1093,7 +1093,7 @@ body::after {
 
 .project-selection__panel {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
 
 .project-selection__selected {
@@ -1110,18 +1110,37 @@ body::after {
 }
 
 .project-selection__options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
 }
 
 .project-selection__choice {
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-full);
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  padding: var(--space-5);
   background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-2xl);
   color: var(--text-primary);
   font-size: var(--text-sm);
-  font-weight: 500;
+  font-weight: 700;
+  text-align: center;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  cursor: pointer;
+}
+
+.project-selection__choice:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.project-selection__choice--active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
 }
 
 [data-theme='dark'] .project-selection__card,
