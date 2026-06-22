@@ -242,11 +242,7 @@ function renderCollaborators(data) {
         <div class="collaborator-card__photo">
           <img src="${collaborator.image}" alt="${name}" />
         </div>
-        <div>
-          <h3 class="collaborator-card__name">${name}</h3>
-          <p class="collaborator-card__role">${collaborator.role}</p>
-          <p class="collaborator-card__note">${collaborator.note}</p>
-        </div>
+        <h3 class="collaborator-card__name">${name}</h3>
       </article>
     `;
         }
