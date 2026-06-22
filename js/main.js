@@ -156,6 +156,10 @@ function getCollaboratorImageUrl(collaborator) {
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1C4D8D&color=fff&size=256&rounded=true`;
 }
 
+function getProjectSelectionImage(choice) {
+  return `https://source.unsplash.com/480x480/?${encodeURIComponent(choice)}`;
+}
+
 function renderProjectSelection(data) {
   const tabs = document.getElementById('project-selection-tabs');
   const options = document.getElementById('project-selection-options');
@@ -184,9 +188,17 @@ function renderProjectSelection(data) {
     selector.updateSubChoices();
     current.textContent = category;
     options.innerHTML = selector.subChoices
-      .map(
-        (choice) => `<button type="button" class="project-selection__choice" data-choice="${choice}">${choice}</button>`
-      )
+      .map((choice) => {
+        const imageUrl = getProjectSelectionImage(choice);
+        return `
+          <button type="button" class="project-selection__choice" data-choice="${choice}">
+            <span class="project-selection__choice-media">
+              <img src="${imageUrl}" alt="${choice}" loading="lazy" />
+            </span>
+            <span class="project-selection__choice-title">${choice}</span>
+          </button>
+        `;
+      })
       .join('');
 
     tabs.querySelectorAll('.project-selection__tab').forEach((button, buttonIndex) => {
