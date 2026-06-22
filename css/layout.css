@@ -785,10 +785,15 @@ body::after {
     box-shadow var(--transition-base);
   display: flex;
   flex-direction: column;
+  --tx: 0px;
+  --ty: 0px;
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: translateX(var(--tx)) translateY(var(--ty)) rotateX(var(--rx)) rotateY(var(--ry));
 }
 
 .project-card:hover {
-  transform: translateY(-6px);
+  transform: translateX(var(--tx)) translateY(calc(-6px + var(--ty))) rotateX(var(--rx)) rotateY(var(--ry));
   box-shadow: var(--shadow-xl);
 }
 
@@ -873,6 +878,130 @@ body::after {
 .project-card__link svg {
   width: 14px;
   height: 14px;
+}
+
+.project-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base), filter var(--transition-base);
+}
+
+.project-card:hover .project-card__image img {
+  transform: scale(1.08) translateY(-4px);
+  filter: brightness(1.05);
+}
+
+.skill-category {
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.skill-category:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.skill-category h3 {
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.skill-category__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.collaborators__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-8);
+}
+
+.collaborator-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-5);
+  align-items: start;
+  padding: var(--space-7);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.collaborator-card:hover {
+  transform: translateX(var(--tx)) translateY(calc(-6px + var(--ty))) rotateX(var(--rx)) rotateY(var(--ry));
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-primary);
+}
+
+.collaborator-card:where(.collaborator-card, .testimonial-card, .skill-category) {
+  --tx: 0px;
+  --ty: 0px;
+  --rx: 0deg;
+  --ry: 0deg;
+}
+
+.collaborator-card__avatar {
+  min-width: 64px;
+  min-height: 64px;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(28, 77, 141, 0.12), rgba(79, 134, 196, 0.18));
+  color: var(--color-primary);
+  font-weight: 800;
+  font-size: var(--text-2xl);
+  display: grid;
+  place-items: center;
+}
+
+.collaborator-card__name {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.collaborator-card__role {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+}
+
+.collaborator-card__note {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+[data-theme='dark'] .project-card,
+[data-theme='dark'] .testimonial-card,
+[data-theme='dark'] .collaborator-card,
+[data-theme='dark'] .skill-category,
+[data-theme='dark'] .form__group input,
+[data-theme='dark'] .form__group textarea {
+  background: var(--bg-secondary);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+[data-theme='dark'] .project-card__image {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .project-card__desc,
+[data-theme='dark'] .collaborator-card__note,
+[data-theme='dark'] .skill-category h3,
+[data-theme='dark'] .collaborator-card__role,
+[data-theme='dark'] .testimonial-card__quote,
+[data-theme='dark'] .testimonial-card__author,
+[data-theme='dark'] .testimonial-card__role {
+  color: var(--text-secondary);
 }
 
 /* ── Testimonials ── */

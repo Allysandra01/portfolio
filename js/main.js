@@ -137,6 +137,26 @@ function renderTestimonials(data) {
     .join('');
 }
 
+function renderCollaborators(data) {
+  const grid = document.getElementById('collaborators-grid');
+  if (!grid || !Array.isArray(data.collaborators)) return;
+
+  grid.innerHTML = data.collaborators
+    .map(
+      (collaborator) => `
+      <article class="collaborator-card" data-animate="fade-up">
+        <div class="collaborator-card__avatar" aria-hidden="true">${collaborator.initials}</div>
+        <div>
+          <h3 class="collaborator-card__name">${collaborator.name}</h3>
+          <p class="collaborator-card__role">${collaborator.role}</p>
+          <p class="collaborator-card__note">${collaborator.note}</p>
+        </div>
+      </article>
+    `
+    )
+    .join('');
+}
+
 function renderContact(data) {
   const social = document.getElementById('contact-social');
   if (!social) return;
@@ -265,6 +285,34 @@ function initContactForm() {
   });
 }
 
+function initCardMotion() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const cards = document.querySelectorAll('.project-card, .testimonial-card, .collaborator-card, .skill-category');
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      const rx = (y - 0.5) * 10;
+      const ry = (x - 0.5) * 10;
+      const tx = (x - 0.5) * 8;
+      const ty = (y - 0.5) * 8;
+      card.style.setProperty('--rx', `${rx}deg`);
+      card.style.setProperty('--ry', `${ry}deg`);
+      card.style.setProperty('--tx', `${tx}px`);
+      card.style.setProperty('--ty', `${ty}px`);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--rx', '0deg');
+      card.style.setProperty('--ry', '0deg');
+      card.style.setProperty('--tx', '0px');
+      card.style.setProperty('--ty', '0px');
+    });
+  });
+}
+
 // Mouse-tracking hero gradient
 function initHeroParallax() {
   const hero = document.getElementById('hero');
@@ -292,6 +340,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderStats(data);
     renderProjects(data);
     renderTestimonials(data);
+    renderCollaborators(data);
     renderContact(data);
     generateStructuredData(data);
   } catch (err) {
@@ -301,5 +350,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   initNavigation();
   initScrollAnimations();
   initContactForm();
+  initCardMotion();
   initHeroParallax();
 });

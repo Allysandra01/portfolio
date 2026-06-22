@@ -141,5 +141,31 @@
       "author": "Maria Garcia",
       "role": "Lead Designer, WebAgency Pro"
     }
+  ],
+  "collaborators": [
+    {
+      "name": "Mia Santos",
+      "initials": "MS",
+      "role": "Design Mentor",
+      "note": "Provided strategic guidance on visual hierarchy and accessibility across interface patterns."
+    },
+    {
+      "name": "Carlos Reyes",
+      "initials": "CR",
+      "role": "Development Partner",
+      "note": "Collaborated on responsive layouts, performance tuning, and cross-browser polish."
+    },
+    {
+      "name": "Tasha Lim",
+      "initials": "TL",
+      "role": "Product Advisor",
+      "note": "Helped validate user flows and improve the overall experience for client handoff."
+    },
+    {
+      "name": "Eric Tan",
+      "initials": "ET",
+      "role": "Accessibility Specialist",
+      "note": "Reviewed interactions and helped ensure screen reader clarity and keyboard support."
+    }
   ]
 }
