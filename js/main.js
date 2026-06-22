@@ -148,6 +148,14 @@ function renderProjects(data) {
   }
 }
 
+function getCollaboratorImageUrl(collaborator) {
+  const name = collaborator.name || collaborator.initials || 'Collaborator';
+  if (collaborator.image && collaborator.image.trim()) {
+    return collaborator.image;
+  }
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1C4D8D&color=fff&size=256&rounded=true`;
+}
+
 function renderProjectSelection(data) {
   const tabs = document.getElementById('project-selection-tabs');
   const options = document.getElementById('project-selection-options');
@@ -237,10 +245,11 @@ function renderCollaborators(data) {
       .map(
         (collaborator) => {
           const name = collaborator.name || collaborator.initials || 'Collaborator';
+          const imageUrl = getCollaboratorImageUrl(collaborator);
           return `
       <article class="collaborator-card" data-animate="fade-up">
         <div class="collaborator-card__photo">
-          <img src="${collaborator.image}" alt="${name}" />
+          <img src="${imageUrl}" alt="${name}" loading="lazy" />
         </div>
         <h3 class="collaborator-card__name">${name}</h3>
       </article>
