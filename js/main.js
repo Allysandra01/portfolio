@@ -156,8 +156,18 @@ function getCollaboratorImageUrl(collaborator) {
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1C4D8D&color=fff&size=256&rounded=true`;
 }
 
-function getProjectSelectionImage(choice) {
-  return `https://source.unsplash.com/480x480/?${encodeURIComponent(choice)}`;
+const PROJECT_SELECTION_IMAGES = {
+  'Layout Designing': './css/images/ally2.jpg',
+  'UI/UX Web': './css/images/allyyy.png',
+  'Video Editing': './css/images/ally2.jpg',
+  'Music Production': './css/images/allyyy.png',
+  'Writing Story': './css/images/ally2.jpg',
+  'Web Development': './css/images/allyyy.png',
+  'Application Development': './css/images/ally2.jpg',
+};
+
+function getProjectSelectionImage(choice, category) {
+  return PROJECT_SELECTION_IMAGES[category] || './css/images/ally2.jpg';
 }
 
 function renderProjectSelection(data) {
@@ -189,7 +199,7 @@ function renderProjectSelection(data) {
     current.textContent = category;
     options.innerHTML = selector.subChoices
       .map((choice) => {
-        const imageUrl = getProjectSelectionImage(choice);
+        const imageUrl = getProjectSelectionImage(choice, category);
         return `
           <button type="button" class="project-selection__choice" data-choice="${choice}">
             <span class="project-selection__choice-media">
