@@ -120,6 +120,46 @@ function renderProjects(data) {
   }
 }
 
+function renderProjectSelection(data) {
+  const tabs = document.getElementById('project-selection-tabs');
+  const options = document.getElementById('project-selection-options');
+  const current = document.getElementById('project-selection-current');
+  if (!tabs || !options || !current || !data.projectSelection) return;
+
+  const categories = data.projectSelection.categories || [];
+  if (!categories.length) return;
+
+  tabs.innerHTML = categories
+    .map(
+      (category, index) => `
+        <button class="project-selection__tab" type="button" role="tab" aria-selected="${index === 0}"
+          data-index="${index}">${category.name}</button>
+      `
+    )
+    .join('');
+
+  function showCategory(index) {
+    const category = categories[index];
+    if (!category) return;
+    current.textContent = category.name;
+    options.innerHTML = category.choices
+      .map((choice) => `<span class="project-selection__choice">${choice}</span>`)
+      .join('');
+
+    tabs.querySelectorAll('.project-selection__tab').forEach((button, buttonIndex) => {
+      button.setAttribute('aria-selected', buttonIndex === index ? 'true' : 'false');
+    });
+  }
+
+  showCategory(0);
+
+  tabs.addEventListener('click', (event) => {
+    const button = event.target.closest('.project-selection__tab');
+    if (!button) return;
+    showCategory(Number(button.dataset.index));
+  });
+}
+
 function renderTestimonials(data) {
   const grid = document.getElementById('testimonials-grid');
   if (!grid) return;
@@ -141,9 +181,26 @@ function renderCollaborators(data) {
   const grid = document.getElementById('collaborators-grid');
   if (!grid || !Array.isArray(data.collaborators)) return;
 
-  grid.innerHTML = data.collaborators
-    .map(
-      (collaborator) => `
+  const uploader = `
+      <article class="uploader-card" data-animate="fade-up">
+        <div class="uploader-card__preview" id="collaborator-photo-preview" aria-hidden="true">
+          <span class="uploader-card__placeholder">+</span>
+        </div>
+        <div class="uploader-card__content">
+          <h3 class="collaborator-card__name">Upload a photo</h3>
+          <p class="collaborator-card__note">Choose an image to preview a collaborator picture inside the card.</p>
+          <label class="upload-button">
+            <input type="file" id="collaborator-photo-input" accept="image/*" />
+            Add Photo
+          </label>
+        </div>
+      </article>
+    `;
+
+  grid.innerHTML = uploader +
+    data.collaborators
+      .map(
+        (collaborator) => `
       <article class="collaborator-card" data-animate="fade-up">
         <div class="collaborator-card__avatar" aria-hidden="true">${collaborator.initials}</div>
         <div>
@@ -153,8 +210,28 @@ function renderCollaborators(data) {
         </div>
       </article>
     `
-    )
-    .join('');
+      )
+      .join('');
+
+  const fileInput = document.getElementById('collaborator-photo-input');
+  const preview = document.getElementById('collaborator-photo-preview');
+  if (fileInput && preview) {
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files?.[0];
+      if (!file) {
+        preview.style.backgroundImage = '';
+        preview.querySelector('.uploader-card__placeholder').style.opacity = '1';
+        return;
+      }
+
+      const url = URL.createObjectURL(file);
+      preview.style.backgroundImage = `url('${url}')`;
+      preview.style.backgroundSize = 'cover';
+      preview.style.backgroundPosition = 'center';
+      const placeholder = preview.querySelector('.uploader-card__placeholder');
+      if (placeholder) placeholder.style.opacity = '0';
+    });
+  }
 }
 
 function renderContact(data) {
@@ -341,6 +418,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderProjects(data);
     renderTestimonials(data);
     renderCollaborators(data);
+    renderProjectSelection(data);
     renderContact(data);
     generateStructuredData(data);
   } catch (err) {
