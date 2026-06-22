@@ -156,19 +156,15 @@ function getCollaboratorImageUrl(collaborator) {
   return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1C4D8D&color=fff&size=256&rounded=true`;
 }
 
-const PROJECT_SELECTION_IMAGES = {
-  'Layout Designing': './css/images/ally2.jpg',
-  'UI/UX Web': './css/images/allyyy.png',
-  'Video Editing': './css/images/ally2.jpg',
-  'Music Production': './css/images/allyyy.png',
-  'Writing Story': './css/images/ally2.jpg',
-  'Web Development': './css/images/allyyy.png',
-  'Application Development': './css/images/ally2.jpg',
+const PROJECT_SELECTION_ICONS = {
+  'Layout Designing': '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 22h20"/><path d="M10 18h12"/><path d="M8 14h16"/><path d="M7 8h18"/><rect x="4" y="4" width="24" height="24" rx="4"/></svg>',
+  'UI/UX Web': '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8h20"/><path d="M6 16h20"/><path d="M6 24h20"/><path d="M14 8v16"/></svg>',
+  'Video Editing': '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="7" width="18" height="18" rx="3"/><path d="M23 12l6 4-6 4V12z"/></svg>',
+  'Music Production': '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 8v16"/><path d="M11 16h10"/><circle cx="21" cy="18" r="5"/><path d="M21 7v11"/></svg>',
+  'Writing Story': '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8h18"/><path d="M7 14h18"/><path d="M7 20h12"/><path d="M10 4h12l5 5v19H5V4z"/></svg>',
+  'Web Development': '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h16"/><path d="M10 26h12"/><path d="M8 10v12"/><path d="M24 10v12"/><path d="M14 10h4"/></svg>',
+  'Application Development': '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="6" width="16" height="20" rx="3"/><path d="M12 12h8"/><path d="M12 18h8"/><path d="M12 24h4"/></svg>',
 };
-
-function getProjectSelectionImage(choice, category) {
-  return PROJECT_SELECTION_IMAGES[category] || './css/images/ally2.jpg';
-}
 
 function renderProjectSelection(data) {
   const tabs = document.getElementById('project-selection-tabs');
@@ -197,14 +193,12 @@ function renderProjectSelection(data) {
     selector.selectedCategory = category;
     selector.updateSubChoices();
     current.textContent = category;
+    const iconMarkup = PROJECT_SELECTION_ICONS[category] || '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="6" width="20" height="20" rx="4"/></svg>';
     options.innerHTML = selector.subChoices
       .map((choice) => {
-        const imageUrl = getProjectSelectionImage(choice, category);
         return `
           <button type="button" class="project-selection__choice" data-choice="${choice}">
-            <span class="project-selection__choice-media">
-              <img src="${imageUrl}" alt="${choice}" loading="lazy" />
-            </span>
+            <span class="project-selection__choice-media">${iconMarkup}</span>
             <span class="project-selection__choice-title">${choice}</span>
           </button>
         `;
