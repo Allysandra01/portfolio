@@ -5,19 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="Alex Chen - Frontend Developer specializing in React, TypeScript, and modern CSS. Building accessible, performant web experiences.">
-  <meta name="theme-color" content="#2563eb">
-  <meta property="og:title" content="Alex Chen | Frontend Developer">
+    content="Allsandra Camacho — Frontend Developer specializing in React, TypeScript, and modern CSS. Building accessible, performant web experiences.">
+  <meta name="theme-color" content="#4f46e5">
+  <meta property="og:title" content="Allsandra Camacho | Frontend Developer">
   <meta property="og:description"
     content="Building accessible, performant web experiences with React, TypeScript, and modern CSS.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://alexchen.dev">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Alex Chen | Frontend Developer">
+  <meta name="twitter:title" content="Allsandra Camacho | Frontend Developer">
   <meta name="twitter:description"
     content="Building accessible, performant web experiences with React, TypeScript, and modern CSS.">
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563eb'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white' font-weight='bold' font-family='system-ui'>A</text></svg>">
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%234f46e5'/><stop offset='100%25' stop-color='%237c3aed'/></linearGradient></defs><rect width='32' height='32' rx='8' fill='url(%23g)'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='white' font-weight='bold' font-family='system-ui'>A</text></svg>">
   <link rel="stylesheet" href="css/main.css">
   <script type="application/ld+json" id="structured-data"></script>
   <title>Allsandra Camacho | Frontend Developer</title>
@@ -26,29 +25,27 @@
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-
   <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
 
   <header class="header" id="header" role="banner">
     <nav class="nav container" aria-label="Main navigation">
-      <a href="#" class="nav__logo" aria-label="Home">Alex Chen</a>
+      <a href="#" class="nav__logo" aria-label="Home">Allsandra Camacho</a>
       <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
         <span class="hamburger"></span>
       </button>
       <ul id="nav-menu" class="nav__list" role="list">
-        <li><a href="#about" class="nav__link">About</a></li>
-        <li><a href="#experience" class="nav__link">Experience</a></li>
-        <li><a href="#projects" class="nav__link">Projects</a></li>
+        <li><a href="#about"        class="nav__link">About</a></li>
+        <li><a href="#experience"   class="nav__link">Experience</a></li>
+        <li><a href="#projects"     class="nav__link">Projects</a></li>
         <li><a href="#testimonials" class="nav__link">Testimonials</a></li>
-        <li><a href="#contact" class="nav__link">Contact</a></li>
+        <li><a href="#contact"      class="nav__link">Contact</a></li>
         <li><a href="#" class="nav__link" id="resume-link">Resume</a></li>
         <li>
           <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
             <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="5" />
-              <path
-                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
             </svg>
             <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
@@ -61,6 +58,8 @@
   </header>
 
   <main id="main-content">
+
+    <!-- ── HERO ─────────────────────────────────────── -->
     <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="hero__content container">
         <p class="hero__badge" data-animate="fade-in" data-delay="100">
@@ -78,7 +77,7 @@
         </p>
         <div class="hero__actions" data-animate="fade-up" data-delay="400">
           <a href="#projects" class="btn btn--primary">View Work</a>
-          <a href="#contact" class="btn btn--outline">Get In Touch</a>
+          <a href="#contact"  class="btn btn--outline">Get In Touch</a>
         </div>
       </div>
       <div class="hero__scroll" aria-hidden="true">
@@ -88,6 +87,7 @@
       </div>
     </section>
 
+    <!-- ── ABOUT ─────────────────────────────────────── -->
     <section id="about" class="section about" aria-labelledby="about-title">
       <div class="container">
         <header class="section__header" data-animate="fade-up">
@@ -95,13 +95,8 @@
           <p class="section__subtitle">A bit about me and my toolkit</p>
         </header>
         <div class="about__grid">
-          <div class="about__bio" data-animate="slide-right">
-            <div class="about__avatar" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="48" height="48">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </div>
+          <div class="about__bio-wrapper" data-animate="slide-right">
+            <div class="about__avatar" aria-hidden="true">A</div>
             <p id="about-bio"></p>
           </div>
           <div class="about__skills" id="about-skills" data-animate="slide-left" role="list"
@@ -110,6 +105,7 @@
       </div>
     </section>
 
+    <!-- ── EXPERIENCE ────────────────────────────────── -->
     <section id="experience" class="section experience section--alt" aria-labelledby="experience-title">
       <div class="container">
         <header class="section__header" data-animate="fade-up">
@@ -120,7 +116,8 @@
       </div>
     </section>
 
-    <section id="stats" class="section stats" aria-labelledby="stats-title" aria-hidden="true">
+    <!-- ── STATS ─────────────────────────────────────── -->
+    <section id="stats" class="section stats" aria-labelledby="stats-title">
       <div class="container">
         <header class="section__header" data-animate="fade-up">
           <h2 id="stats-title" class="section__title">By the Numbers</h2>
@@ -130,6 +127,7 @@
       </div>
     </section>
 
+    <!-- ── PROJECTS ──────────────────────────────────── -->
     <section id="projects" class="section projects section--alt" aria-labelledby="projects-title">
       <div class="container">
         <header class="section__header" data-animate="fade-up">
@@ -138,11 +136,12 @@
         </header>
         <div id="project-filters" class="filters" role="group" aria-label="Filter projects by technology"
           data-animate="fade-in"></div>
-        <div id="projects-grid" class="projects__grid" data-animate="fade-up" role="list" aria-label="Project showcase">
-        </div>
+        <div id="projects-grid" class="projects__grid" data-animate="fade-up" role="list"
+          aria-label="Project showcase"></div>
       </div>
     </section>
 
+    <!-- ── TESTIMONIALS ──────────────────────────────── -->
     <section id="testimonials" class="section testimonials" aria-labelledby="testimonials-title">
       <div class="container">
         <header class="section__header" data-animate="fade-up">
@@ -153,11 +152,12 @@
       </div>
     </section>
 
+    <!-- ── CONTACT ───────────────────────────────────── -->
     <section id="contact" class="section contact section--alt" aria-labelledby="contact-title">
       <div class="container">
         <header class="section__header" data-animate="fade-up">
           <h2 id="contact-title" class="section__title">Contact</h2>
-          <p class="section__subtitle">Let\'s work together</p>
+          <p class="section__subtitle">Let's work together</p>
         </header>
         <form class="contact-form" id="contact-form" action="https://formspree.io/f/your-id" method="POST"
           data-animate="fade-up">
@@ -166,9 +166,7 @@
             <input type="text" id="name" name="name" placeholder="Your name" required minlength="2">
             <p class="form__error">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="15" y1="9" x2="9" y2="15" />
-                <line x1="9" y1="9" x2="15" y2="15" />
+                <circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" />
               </svg>
               Please enter your name
             </p>
@@ -178,9 +176,7 @@
             <input type="email" id="email" name="email" placeholder="your@email.com" required>
             <p class="form__error">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="15" y1="9" x2="9" y2="15" />
-                <line x1="9" y1="9" x2="15" y2="15" />
+                <circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" />
               </svg>
               Please enter a valid email
             </p>
@@ -191,9 +187,7 @@
               minlength="10"></textarea>
             <p class="form__error">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="15" y1="9" x2="9" y2="15" />
-                <line x1="9" y1="9" x2="15" y2="15" />
+                <circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" />
               </svg>
               Message must be at least 10 characters
             </p>
@@ -206,10 +200,10 @@
           </div>
           <div class="form__banner" id="form-banner" aria-live="polite"></div>
         </form>
-        <div id="contact-social" class="contact__social" role="list" aria-label="Social links" data-animate="fade-up">
-        </div>
+        <div id="contact-social" class="contact__social" role="list" aria-label="Social links" data-animate="fade-up"></div>
       </div>
     </section>
+
   </main>
 
   <footer class="footer" role="contentinfo">
@@ -228,7 +222,7 @@
         <ul class="footer__links" role="list">
           <li><a href="#" class="footer__link">Back to top</a></li>
           <li><a href="#projects" class="footer__link">Projects</a></li>
-          <li><a href="#contact" class="footer__link">Contact</a></li>
+          <li><a href="#contact"  class="footer__link">Contact</a></li>
         </ul>
       </nav>
     </div>

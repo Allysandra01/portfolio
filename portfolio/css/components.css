@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0.75rem 1.75rem;
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-base) var(--ease-out);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  background: rgba(255,255,255,0.10);
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn--primary {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.45);
+  color: var(--color-white);
+}
+
+.btn--primary:active {
+  transform: translateY(0);
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--outline:hover {
+  border-color: var(--color-indigo-400);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  background: var(--color-primary-light);
+}
+
+[data-theme="dark"] .btn--outline:hover {
+  background: rgba(99,102,241,0.1);
+}
+
+/* ═══════════════════════════════════════════════════
+   TECH BADGE
+═══════════════════════════════════════════════════ */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--color-indigo-600);
+  background: var(--color-indigo-50);
+  border: 1px solid var(--color-indigo-100);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .tech-badge {
+  color: var(--color-indigo-300);
+  background: rgba(99,102,241,0.10);
+  border-color: rgba(99,102,241,0.20);
+}
+
+.tech-badge:hover {
+  background: var(--color-indigo-100);
+  border-color: var(--color-indigo-300);
+}
+
+[data-theme="dark"] .tech-badge:hover {
+  background: rgba(99,102,241,0.18);
+}

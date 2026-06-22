@@ -153,9 +153,10 @@
     var labels = { github: 'GitHub', linkedin: 'LinkedIn', twitter: 'Twitter', dribbble: 'Dribbble' };
     var social = data.personal.social;
     socialContainer.innerHTML = Object.keys(social).map(function(key) {
-      return '<a href="' + social[key] + '" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="' + labels[key] || key + '">' +
+      var label = labels[key] || key;
+      return '<a href="' + social[key] + '" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="' + label + '">' +
         getSocialIcon(key) +
-        '<span class="social-link__tooltip">' + (labels[key] || key) + '</span>' +
+        '<span class="social-link__tooltip">' + label + '</span>' +
       '</a>';
     }).join('');
   }
@@ -235,8 +236,10 @@
 
     var typewriterEl = document.getElementById('typewriter-text');
     if (typewriterEl && data.personal.title) {
-      var text = data.personal.title + ' specializing in React, TypeScript, and modern CSS. ' +
-        (data.experience ? data.experience.length : '5') + '+ years of experience crafting responsive, accessible interfaces.';
+      var skillSample = (data.skills && data.skills[0] && data.skills[0].items.slice(0, 3).join(', ')) || 'React, TypeScript, CSS';
+      var yearsExp = (data.experience ? data.experience.length + 2 : 5);
+      var text = data.personal.title + ' specializing in ' + skillSample + '. ' +
+        yearsExp + '+ years crafting responsive, accessible interfaces that delight users.';
       startTypewriter(text, typewriterEl);
     }
   }
@@ -307,7 +310,8 @@
       .catch(function() {
         submitWrap.classList.remove('is-loading');
         banner.className = 'form__banner form__banner--error is-visible';
-        banner.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Oops! Something went wrong. Please email me directly at alex@example.com.';
+        var contactEmail = (window._portfolioEmail || 'contact@example.com');
+        banner.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Oops! Something went wrong. Please email me directly at ' + contactEmail + '.';
       });
     });
   }
@@ -319,6 +323,9 @@
         return response.json();
       })
       .then(function(data) {
+        // Expose email globally so the form error banner can use it
+        window._portfolioEmail = data.personal.email || 'contact@example.com';
+
         renderHero(data);
         renderAbout(data);
         renderExperience(data);
@@ -330,6 +337,11 @@
 
         if (window.ProjectRenderer && data.projects) {
           window.ProjectRenderer.init(data.projects);
+        }
+
+        // Re-observe newly injected [data-animate] elements
+        if (window.ScrollAnimator && window.ScrollAnimator.refresh) {
+          window.ScrollAnimator.refresh();
         }
 
         animateCounters();
