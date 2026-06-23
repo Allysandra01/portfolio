@@ -1,0 +1,24 @@
+Meeting: AI Bootcamp Weekly Sync — 2026-05-12
+Attendees: Mark Solidarios (Facilitator), Alex Cruz (Dev), Bea Santos (Design), Carlo Reyes (Ops), Diane Lim (PM)
+
+Mark: Welcome back. Two agenda items today: where we are on Day 4 prep and what we owe DICT by Friday.
+
+Alex: Day 4 fixture pipeline is done. I tested Ollama on M2 — twenty tokens a second, four second time to first token. LM Studio on the same laptop is about the same. The 2B model handles JSON schema about nine out of ten times.
+
+Bea: I will have the FAQ docs cleaned up by Wednesday. Two of them have last quarter's numbers and I need to refresh the citations before students ground their prompts in stale data.
+
+Carlo: Wi-Fi will be turned off for Module 11 only. I will physically flip the access point at 14:00 and put it back at 15:30. Everyone should screenshot their model answer before they hand back the room.
+
+Diane: DICT needs the deliverable list for the Shark Tank by Friday 5pm. I will draft a one-pager tonight and send it to the group. Mark, can you sign off on the rubric before I send it?
+
+Mark: Yes, send by Wednesday so I have time to push back. Also, we are adding an automation flow brief to Module 13 because the existing slide deck was thin on governance. Bea, that is a one-day ask. Can you cover it?
+
+Bea: Yes, but I need the risk-tier wording finalised today. Otherwise I will have to redo the worked example.
+
+Alex: Action item — I will write the risk-tier wording in the next hour and post it in the channel.
+
+Mark: Good. Next meeting is Tuesday 2026-05-19 at the same time. Carlo, please make sure the meeting room is booked.
+
+Carlo: Done.
+
+Mark: Anything else? OK, thanks everyone.

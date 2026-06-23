@@ -1,0 +1,76 @@
+DICT Acceptable Use Policy for AI Productivity Tools
+Document ID: DICT-AUP-2026-01
+Effective Date: 2026-04-01
+Review Cycle: Annual
+Owner: DICT Information Security Office
+
+1. Purpose
+
+This policy defines the acceptable use of AI productivity tools, including
+cloud-hosted assistants and locally deployed open-weight models, by DICT
+personnel and accredited partners. It applies to every device managed by
+DICT and to every account that accesses DICT data.
+
+2. Scope
+
+2.1 In scope: any system or service that processes, summarises, drafts, or
+generates text, code, images, or audio using a machine learning model.
+2.2 Out of scope: deterministic tooling such as spreadsheets, version
+control, and ticketing systems unless they embed an AI feature.
+2.3 Out of scope: offline spell checkers and grammar checkers that do not
+send data to a remote service.
+
+3. Permitted uses
+
+3.1 Drafting internal memos, briefings, and meeting summaries from source
+material the user is authorised to read.
+3.2 Generating, refactoring, and reviewing source code for DICT projects,
+provided the source code is not classified as Restricted or higher.
+3.3 Translating documents between English and Filipino for official
+communications.
+3.4 Producing first-pass design mockups from a written requirements
+document.
+
+4. Prohibited uses
+
+4.1 Submitting data classified as Restricted or higher to any cloud-hosted
+AI service. Restricted data includes citizen personal data, internal audit
+reports, and infrastructure credentials.
+4.2 Generating, distributing, or storing content that is unlawful,
+discriminatory, harassing, or fraudulent.
+4.3 Using AI output as the sole basis for a decision that affects a
+citizen's rights, benefits, or obligations without human review.
+4.4 Bypassing the human-in-the-loop controls specified in Section 6 for
+any autonomous workflow.
+
+5. Model selection
+
+5.1 Cloud models (Gemini, OpenAI, Anthropic) may be used for tasks that do
+not involve Restricted data.
+5.2 Locally deployed open-weight models (Gemma 4, Llama 3) are preferred
+for tasks that involve internal or sensitive-but-unclassified data and for
+work performed in air-gapped environments.
+5.3 The Information Security Office maintains a list of approved models and
+their permitted data classes.
+
+6. Human oversight
+
+6.1 Every AI-generated artefact that informs an external communication must
+be reviewed by a human before it is sent.
+6.2 Autonomous workflows require a named human approver, an audit log
+entry, and a tested rollback path before they are activated.
+6.3 The audit log must record the prompt, the model, the output, the
+decision, and the action with timestamps.
+
+7. Incident reporting
+
+7.1 Suspected policy violations must be reported to the Information Security
+Office within 24 hours.
+7.2 Confirmed violations may result in revocation of AI tool access,
+referral to the DICT disciplinary process, or both.
+
+8. Review
+
+This policy is reviewed annually by the Information Security Office in
+consultation with the DICT Legal Division. Material changes are approved by
+the DICT Secretary before they take effect.

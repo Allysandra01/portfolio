@@ -7,12 +7,12 @@
   <meta name="description"
     content="Allsandra Camacho — Frontend Developer specializing in React, TypeScript, and modern CSS. Building accessible, performant web experiences." />
   <meta name="theme-color" content="#4f46e5" />
-  <meta property="og:title" content="Jan Allysandra Espia| Frontend Developer" />
+  <meta property="og:title" content="ALLY | Frontend Developer" />
   <meta property="og:description"
     content="Building accessible, performant web experiences with React, TypeScript, and modern CSS." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Jan Allysandra Espia | Frontend Developer" />
+  <meta name="twitter:title" content="ALLY | Frontend Developer" />
   <meta name="twitter:description"
     content="Building accessible, performant web experiences with React, TypeScript, and modern CSS." />
   <link rel="icon"
@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <script type="application/ld+json" id="structured-data"></script>
-  <title>Jan Allysandra Espia | Frontend Developer</title>
+  <title>ALLY | Frontend Developer</title>
 </head>
 
 <body>
@@ -33,7 +33,7 @@
 
   <header class="header" id="header" role="banner">
     <nav class="nav container" aria-label="Main navigation">
-      <a href="#" class="nav__logo nav__logo--highlight" aria-label="Home">Jan Allysandra Espia</a>
+      <a href="#" class="nav__logo nav__logo--highlight" aria-label="Home">ALLY</a>
       <button class="nav__toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
         <span class="hamburger"></span>
       </button>
@@ -179,6 +179,24 @@
           <p class="section__subtitle">Metrics that matter</p>
         </header>
         <div id="stats-grid" class="stats__grid" data-stagger></div>
+      </div>
+    </section>
+
+    <!-- Project Selection -->
+    <section id="project-selection" class="section project-selection section--alt" aria-labelledby="project-selection-title">
+      <div class="container">
+        <header class="section__header" data-animate="fade-up">
+          <h2 id="project-selection-title" class="section__title">Project Selection</h2>
+          <p class="section__subtitle">Browse by creative category and choose the right project type.</p>
+        </header>
+        <div class="project-selection__card" data-animate="fade-up">
+          <p class="project-selection__description">Select a category below to reveal the available project options for layout, design, video, music, writing, and development.</p>
+          <div id="project-selection-tabs" class="project-selection__tabs" role="tablist" aria-label="Project categories"></div>
+          <div class="project-selection__panel">
+            <p class="project-selection__selected">Selected category: <span id="project-selection-current"></span></p>
+            <div id="project-selection-options" class="project-selection__options" role="group" aria-label="Project options"></div>
+          </div>
+        </div>
       </div>
     </section>
 

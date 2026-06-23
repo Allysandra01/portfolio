@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #fdfbf7; /* Deep comfort cozy cream off-white */
+    background-image: 
+      radial-gradient(rgba(149, 213, 178, 0.03), rgba(254, 197, 187, 0.03)),
+      repeating-linear-gradient(0deg, rgba(163, 177, 138, 0.02) 0px, rgba(163, 177, 138, 0.02) 1px, transparent 1px, transparent 4px);
+    color: #3d5a5a; /* Warm slate sage green/charcoal text */
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Cozy Cabinet Card Shadow */
+.shadow-cozy {
+  box-shadow: 0 10px 30px -10px rgba(149, 213, 178, 0.25), 
+              0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* Pulsing pastel shadows for active clock tickers */
+.shadow-active-white {
+  box-shadow: 0 0 20px rgba(183, 228, 199, 0.65);
+  border-color: #b7e4c7;
+}
+
+.shadow-active-black {
+  box-shadow: 0 0 20px rgba(255, 202, 212, 0.65);
+  border-color: #ffcad4;
+}
+
+/* Soft blink animation for "Gemma is thinking..." */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-blink {
+  animation: blink 1.2s infinite ease-in-out;
+}
+
+/* Micro-animation transitions */
+.transition-cozy {
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Custom Scrollbars to match our cozy pastel theme */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #fdfbf7;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #b7e4c7;
+  border-color: #95d5b2;
+}
+
+/* Global button click clicky click */
+.btn-clicker {
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.btn-clicker:active {
+  transform: scale(0.96) translateY(1px);
+}
+
+/* Custom float up keyframes for coins additions */
+@keyframes floatUp {
+  0% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  20% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-35px);
+    opacity: 0;
+  }
+}
+
+.animate-floatUp {
+  animation: floatUp 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Slide in from right for toasts */
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  15% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  85% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+.animate-slideInFromRight {
+  animation: slideInFromRight 4.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}

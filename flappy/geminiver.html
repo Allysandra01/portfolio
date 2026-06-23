@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparkling Blue Flappy Bird</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: #0d1b2a;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        /* Custom magical blue glow */
+        .glow-blue {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+        }
+        /* Sparkling animation for HTML overlays */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        .html-sparkle {
+            animation: twinkle 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-2 md:p-6 bg-radial-gradient">
+
+    <div class="relative w-full max-w-[450px] aspect-[9/16] rounded-3xl overflow-hidden border-4 border-blue-400 glow-blue bg-slate-900 shadow-2xl flex flex-col items-center justify-center">
+        
+        <!-- Game Canvas -->
+        <canvas id="gameCanvas" class="absolute inset-0 w-full h-full block z-0"></canvas>
+
+        <!-- Dynamic Game UI Overlay -->
+        <div id="uiContainer" class="absolute inset-0 z-10 flex flex-col justify-between p-6 pointer-events-none text-white">
+            
+            <!-- Top Bar (HUD) -->
+            <div class="flex justify-between items-center w-full transition-opacity duration-300 opacity-0" id="hud">
+                <!-- Score Indicator -->
+                <div class="bg-blue-900/60 backdrop-blur-md px-4 py-2 rounded-full border border-blue-400/40 flex items-center space-x-2">
+                    <span class="text-sm font-semibold text-blue-300">SCORE</span>
+                    <span id="currentScore" class="text-2xl font-bold text-white drop-shadow">0</span>
+                </div>
+                <!-- High Score Indicator -->
+                <div class="bg-blue-950/80 backdrop-blur-md px-4 py-2 rounded-full border border-yellow-400/40 flex items-center space-x-2">
+                    <span class="text-sm font-semibold text-yellow-300">🏆 BEST</span>
+                    <span id="bestScore" class="text-2xl font-bold text-yellow-200 drop-shadow">0</span>
+                </div>
+            </div>
+
+            <!-- Start / Menu Overlay -->
+            <div id="startMenu" class="flex flex-col items-center justify-center my-auto w-full pointer-events-auto text-center space-y-6 animate-fade-in">
+                <!-- Glowing Title -->
+                <div class="relative">
+                    <h1 class="text-5xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-cyan-200 via-blue-200 to-blue-400 drop-shadow-[0_4px_10px_rgba(59,130,246,0.8)] uppercase">
+                        Flappy Sparkle
+                    </h1>
+                    <!-- Twinkling mini decorators -->
+                    <span class="absolute -top-4 -left-4 text-2xl html-sparkle">✨</span>
+                    <span class="absolute -bottom-2 -right-4 text-2xl html-sparkle" style="animation-delay: 1.5s;">✨</span>
+                </div>
+                
+                <p class="text-cyan-100 text-sm md:text-base max-w-[280px] leading-relaxed drop-shadow">
+                    Fly through the majestic glowing canyon. Tap screen or press Space to jump!
+                </p>
+
+                <!-- Bird Skin Customizer Selection -->
+                <div class="bg-blue-950/60 backdrop-blur-md p-4 rounded-2xl border border-blue-400/30 w-full max-w-[320px]">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-cyan-300 mb-3">Choose Your Magic Companion</h3>
+                    <div class="grid grid-cols-4 gap-2" id="skinSelector">
+                        <!-- Filled dynamically by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button id="playBtn" class="px-8 py-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 rounded-full font-bold text-xl uppercase tracking-widest shadow-lg hover:brightness-110 active:scale-95 transition-all border border-cyan-200/40 glow-blue">
+                    Flap Off!
+                </button>
+            </div>
+
+            <!-- Pause Overlay -->
+            <div id="pauseMenu" class="hidden flex-col items-center justify-center my-auto w-full pointer-events-auto text-center space-y-4">
+                <h2 class="text-4xl font-extrabold text-blue-200">GAME PAUSED</h2>
+                <button id="resumeBtn" class="px-6 py-3 bg-cyan-500 rounded-full font-bold">Resume</button>
+            </div>
+
+            <!-- Game Over Overlay -->
+            <div id="gameOverMenu" class="hidden flex-col items-center justify-center my-auto w-full pointer-events-auto text-center space-y-6">
+                <div class="bg-blue-950/90 backdrop-blur-lg p-6 rounded-3xl border-2 border-cyan-400/60 shadow-2xl w-full max-w-[320px] transform scale-95 transition-transform duration-300" id="gameOverCard">
+                    <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-yellow-400 mb-2">CRASHED!</h2>
+                    
+                    <!-- Medal display -->
+                    <div class="flex justify-center my-3" id="medalContainer">
+                        <!-- Dynamic Medal goes here -->
+                    </div>
+
+                    <div class="space-y-3 mt-4">
+                        <div class="flex justify-between border-b border-blue-800 pb-2">
+                            <span class="text-cyan-300">Final Score</span>
+                            <span id="finalScore" class="text-2xl font-bold text-white">0</span>
+                        </div>
+                        <div class="flex justify-between border-b border-blue-800 pb-2">
+                            <span class="text-yellow-400">Personal Best</span>
+                            <span id="finalBest" class="text-2xl font-bold text-yellow-300">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Skin unlock notice -->
+                    <div id="unlockNotice" class="text-xs text-yellow-200 font-semibold bg-yellow-950/40 p-2 rounded-lg mt-4 hidden border border-yellow-700/40 animate-pulse">
+                        ✨ New Companion Unlocked!
+                    </div>
+                </div>
+
+                <div class="flex space-x-4">
+                    <button id="restartBtn" class="px-6 py-3 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full font-bold text-lg shadow-md hover:brightness-110 active:scale-95 transition-all">
+                        Try Again
+                    </button>
+                    <button id="homeBtn" class="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-full font-bold text-lg transition-all">
+                        Menu
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer indicator -->
+            <div id="footerHint" class="text-center text-xs text-cyan-400/60 pointer-events-auto select-none py-1">
+                Touch canvas directly to fly!
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- SOUND EFFECTS (Web Audio API Synthesizer) ---
+        class SoundEngine {
+            constructor() {
+                this.ctx = null;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            }
+
+            playJump() {
+                this.init();
+                if (!this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+                // Quick upward pitch bend
+                osc.frequency.exponentialRampToValueAtTime(450, this.ctx.currentTime + 0.15);
+
+                gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.15);
+
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.15);
+            }
+
+            playScore() {
+                this.init();
+                if (!this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.08); // E5
+
+                gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.25);
+
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.25);
+            }
+
+            playHit() {
+                this.init();
+                if (!this.ctx) return;
+                // Crash noise generator
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + 0.4);
+
+                gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.4);
+
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.4);
+            }
+        }
+
+        const audio = new SoundEngine();
+
+        // --- SKINS DATABASE & STATE ---
+        const SKINS = [
+            { id: 'yellow', name: 'Sunny Sparkle', color: '#ffb703', wingColor: '#ffb703', eyeColor: '#000000', req: 0, emoji: '🐥' },
+            { id: 'aqua', name: 'Oceanic Whisp', color: '#4cc9f0', wingColor: '#4361ee', eyeColor: '#ffffff', req: 5, emoji: '🐳' },
+            { id: 'neon', name: 'Neon Dreamer', color: '#f72585', wingColor: '#b5179e', eyeColor: '#3a0ca3', req: 15, emoji: '🦄' },
+            { id: 'gold', name: 'Golden Legend', color: '#ffd700', wingColor: '#ff8c00', eyeColor: '#000000', req: 30, emoji: '👑' }
+        ];
+
+        let selectedSkinIndex = 0;
+        let bestScoreVal = parseInt(localStorage.getItem('sparkle_high_score')) || 0;
+
+        // --- STREAMING_CHUNK: Game Engine variables and Physics constraints ---
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Virtual internal dimensions
+        const V_WIDTH = 450;
+        const V_HEIGHT = 800;
+
+        // Adjust resolution
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            ctx.imageSmoothingEnabled = true;
+        }
+
+        // Handle window events
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            renderSkinSelector();
+            updateScoresUI();
+        });
+
+        // Game State Variables
+        let gameState = 'START'; // START, PLAYING, GAMEOVER
+        let score = 0;
+        let frameCount = 0;
+
+        // Physics parameters
+        const GRAVITY = 0.38;
+        const JUMP_FORCE = -6.8;
+        const MAX_FALL_SPEED = 9.5;
+        const PIPE_SPEED = 2.4;
+        const PIPE_SPAWN_INTERVAL = 110; // frames
+        const PIPE_GAP = 185;
+
+        // Entity Definitions
+        let bird = {
+            x: 100,
+            y: 350,
+            radius: 17,
+            velocity: 0,
+            rotation: 0,
+            wingPhase: 0
+        };
+
+        let pipes = [];
+        let particles = [];
+        let bgSparkles = [];
+        let bgClouds = [];
+        let distantHills = [];
+
+        // --- STREAMING_CHUNK: Initializing background elements (Sparkles, Clouds, Hills) ---
+        function initBackgroundElements() {
+            bgSparkles = [];
+            bgClouds = [];
+            distantHills = [];
+
+            // Sparkling star particles in background
+            for (let i = 0; i < 24; i++) {
+                bgSparkles.push({
+                    x: Math.random() * V_WIDTH,
+                    y: Math.random() * (V_HEIGHT - 100),
+                    size: Math.random() * 4 + 2,
+                    maxSize: Math.random() * 5 + 4,
+                    speed: Math.random() * 0.4 + 0.1,
+                    pulseSpeed: Math.random() * 0.05 + 0.02,
+                    phase: Math.random() * Math.PI,
+                    color: `hsla(${200 + Math.random() * 40}, 100%, ${80 + Math.random() * 20}%, ${0.5 + Math.random() * 0.5})`
+                });
+            }
+
+            // Drifting cartoonish clouds
+            for (let i = 0; i < 5; i++) {
+                bgClouds.push({
+                    x: Math.random() * V_WIDTH * 1.5,
+                    y: Math.random() * 250 + 50,
+                    size: Math.random() * 30 + 30,
+                    speed: Math.random() * 0.2 + 0.1,
+                    alpha: Math.random() * 0.25 + 0.15
+                });
+            }
+
+            // Distant hills/waves for background depth
+            distantHills = [
+                { offset: 0, speed: 0.1, color: '#102a43', heightMap: generateWaves(6, 60, 40) },
+                { offset: 0, speed: 0.2, color: '#1e4e8c', heightMap: generateWaves(5, 50, 30) },
+                { offset: 0, speed: 0.35, color: '#005a9e', heightMap: generateWaves(4, 40, 20) }
+            ];
+        }
+
+        function generateWaves(points, avgHeight, variance) {
+            const arr = [];
+            for (let i = 0; i <= points; i++) {
+                arr.push(avgHeight + (Math.random() - 0.5) * variance);
+            }
+            return arr;
+        }
+
+        // Start initialization immediately
+        initBackgroundElements();
+
+        // --- STREAMING_CHUNK: Main Game Loop physics updates ---
+        function updatePhysics() {
+            frameCount++;
+
+            // Handle sparkling background motion
+            bgSparkles.forEach(sparkle => {
+                sparkle.x -= sparkle.speed;
+                sparkle.phase += sparkle.pulseSpeed;
+                if (sparkle.x < -20) {
+                    sparkle.x = V_WIDTH + 20;
+                    sparkle.y = Math.random() * (V_HEIGHT - 100);
+                }
+            });
+
+            // Handle clouds
+            bgClouds.forEach(cloud => {
+                cloud.x -= cloud.speed;
+                if (cloud.x < -150) {
+                    cloud.x = V_WIDTH + 150;
+                    cloud.y = Math.random() * 250 + 50;
+                }
+            });
+
+            // If we are playing, move waves
+            if (gameState === 'PLAYING') {
+                distantHills.forEach(hill => {
+                    hill.offset += hill.speed;
+                    if (hill.offset > V_WIDTH / (hill.heightMap.length - 1)) {
+                        hill.offset = 0;
+                    }
+                });
+            }
+
+            // Game State Specific Updates
+            if (gameState === 'PLAYING') {
+                // Apply Gravity to Bird
+                bird.velocity += GRAVITY;
+                if (bird.velocity > MAX_FALL_SPEED) bird.velocity = MAX_FALL_SPEED;
+                bird.y += bird.velocity;
+
+                // Simple rotation based on climb/fall
+                bird.rotation = Math.min(Math.PI / 4, Math.max(-Math.PI / 7, bird.velocity * 0.08));
+
+                // Update wing flapping cycle
+                bird.wingPhase += 0.18;
+
+                // Spawn feathers/water trials from the trailing edge
+                if (frameCount % 4 === 0) {
+                    particles.push({
+                        x: bird.x - 12,
+                        y: bird.y + Math.sin(frameCount) * 4,
+                        vx: -1.5,
+                        vy: (Math.random() - 0.5) * 1,
+                        alpha: 1,
+                        size: Math.random() * 6 + 3,
+                        color: SKINS[selectedSkinIndex].color,
+                        type: 'wing'
+                    });
+                }
+
+                // Floor / Ceiling constraints
+                if (bird.y - bird.radius < 0) {
+                    bird.y = bird.radius;
+                    bird.velocity = 0;
+                }
+                if (bird.y + bird.radius > V_HEIGHT - 40) {
+                    triggerGameOver();
+                }
+
+                // Spawn and move pipes
+                if (frameCount % PIPE_SPAWN_INTERVAL === 0) {
+                    spawnPipe();
+                }
+
+                pipes.forEach((pipe, index) => {
+                    pipe.x -= PIPE_SPEED;
+
+                    // Check for scoring
+                    if (!pipe.passed && pipe.x + pipe.width / 2 < bird.x) {
+                        pipe.passed = true;
+                        score++;
+                        audio.playScore();
+                        updateScoresUI();
+                        triggerScoreSplashes(pipe.x + pipe.width / 2);
+                    }
+
+                    // Collision checking
+                    if (checkCollision(bird, pipe)) {
+                        triggerGameOver();
+                    }
+                });
+
+                // Clear off-screen pipes
+                pipes = pipes.filter(p => p.x > -100);
+            } else if (gameState === 'START') {
+                // Gentle floating effect in start menu
+                bird.y = 350 + Math.sin(frameCount * 0.05) * 15;
+                bird.rotation = Math.sin(frameCount * 0.05) * 0.1;
+                bird.wingPhase += 0.06;
+            }
+
+            // Update particles
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.02;
+            });
+            particles = particles.filter(p => p.alpha > 0);
+        }
+
+        // Spawn a brand new stylized obstacle
+        function spawnPipe() {
+            // High dynamic pipe sizing
+            const minHeight = 100;
+            const maxHeight = V_HEIGHT - PIPE_GAP - 150;
+            const topHeight = Math.floor(Math.random() * (maxHeight - minHeight)) + minHeight;
+
+            pipes.push({
+                x: V_WIDTH + 80,
+                topHeight: topHeight,
+                bottomY: topHeight + PIPE_GAP,
+                width: 76,
+                passed: false
+            });
+        }
+
+        // Circular Bird vs Rectangular Pipe math
+        function checkCollision(b, p) {
+            // Outer boundaries
+            const bx = b.x;
+            const by = b.y;
+            const br = b.radius - 2; // slightly forgiving hitbox
+
+            // Upper Pipe Collision check
+            if (bx + br > p.x && bx - br < p.x + p.width) {
+                if (by - br < p.topHeight) {
+                    return true;
+                }
+            }
+
+            // Lower Pipe Collision check
+            if (bx + br > p.x && bx - br < p.x + p.width) {
+                if (by + br > p.bottomY) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // --- STREAMING_CHUNK: High-fidelity drawing of animated elements ---
+        // Generates beautiful starburst sparkles when scoring
+        function triggerScoreSplashes(targetX) {
+            for (let i = 0; i < 15; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 4 + 2;
+                particles.push({
+                    x: targetX,
+                    y: V_HEIGHT / 2 + (Math.random() - 0.5) * 200,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    alpha: 1,
+                    size: Math.random() * 8 + 4,
+                    color: '#a5f3fc',
+                    type: 'spark'
+                });
+            }
+        }
+
+        // Draw sparkles on canvas helper
+        function drawSparkleStar(c, cx, cy, spikes, outerRadius, innerRadius, color) {
+            let rot = Math.PI / 2 * 3;
+            let x = cx;
+            let y = cy;
+            let step = Math.PI / spikes;
+
+            c.save();
+            c.beginPath();
+            c.moveTo(cx, cy - outerRadius);
+            for (let i = 0; i < spikes; i++) {
+                x = cx + Math.cos(rot) * outerRadius;
+                y = cy + Math.sin(rot) * outerRadius;
+                c.lineTo(x, y);
+                rot += step;
+
+                x = cx + Math.cos(rot) * innerRadius;
+                y = cy + Math.sin(rot) * innerRadius;
+                c.lineTo(x, y);
+                rot += step;
+            }
+            c.lineTo(cx, cy - outerRadius);
+            c.closePath();
+            c.fillStyle = color;
+            c.shadowColor = color;
+            c.shadowBlur = 10;
+            c.fill();
+            c.restore();
+        }
+
+        // Render scene
+        function drawGame() {
+            // Apply scale logic for sharp output
+            const scaleX = canvas.width / V_WIDTH;
+            const scaleY = canvas.height / V_HEIGHT;
+
+            ctx.save();
+            ctx.scale(scaleX, scaleY);
+
+            // 1. CLEAR AND DRAW BASE GRADIENT SKY (Dark Blue to Rich Royal Blue)
+            const skyGrad = ctx.createLinearGradient(0, 0, 0, V_HEIGHT);
+            skyGrad.addColorStop(0, '#000814');
+            skyGrad.addColorStop(0.3, '#001d3d');
+            skyGrad.addColorStop(0.7, '#003566');
+            skyGrad.addColorStop(1, '#000814');
+            ctx.fillStyle = skyGrad;
+            ctx.fillRect(0, 0, V_WIDTH, V_HEIGHT);
+
+            // 2. DRAW TWINKLING SPARKLES (Far Background)
+            bgSparkles.forEach(sparkle => {
+                const liveSize = sparkle.size + Math.sin(sparkle.phase) * (sparkle.maxSize - sparkle.size);
+                drawSparkleStar(ctx, sparkle.x, sparkle.y, 4, liveSize, liveSize / 2.5, sparkle.color);
+            });
+
+            // 3. DRAW DRIFTING CARTOONISH CLOUDS
+            bgClouds.forEach(cloud => {
+                ctx.fillStyle = `rgba(173, 232, 244, ${cloud.alpha})`;
+                ctx.beginPath();
+                ctx.arc(cloud.x, cloud.y, cloud.size, 0, Math.PI * 2);
+                ctx.arc(cloud.x + cloud.size * 0.5, cloud.y - cloud.size * 0.3, cloud.size * 0.8, 0, Math.PI * 2);
+                ctx.arc(cloud.x + cloud.size * 1.1, cloud.y, cloud.size * 0.6, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // 4. DRAW DISTANT OCEAN / HILL WAVES (Layered Parallax)
+            distantHills.forEach(hill => {
+                ctx.fillStyle = hill.color;
+                ctx.beginPath();
+                const points = hill.heightMap;
+                const segmentWidth = V_WIDTH / (points.length - 1);
+                
+                ctx.moveTo(-hill.offset, V_HEIGHT);
+                for (let i = 0; i < points.length; i++) {
+                    const x = i * segmentWidth - hill.offset;
+                    const y = V_HEIGHT - points[i] - 30;
+                    ctx.lineTo(x, y);
+                }
+                // Continue projection off-canvas to hide seams
+                ctx.lineTo(V_WIDTH + 100, V_HEIGHT);
+                ctx.lineTo(-100, V_HEIGHT);
+                ctx.closePath();
+                ctx.fill();
+            });
+
+            // --- STREAMING_CHUNK: Drawing Pipes with glowing animated highlights ---
+            // 5. DRAW GORGEOUS PIPES
+            pipes.forEach(pipe => {
+                // Pipe body gradient
+                const pipeGrad = ctx.createLinearGradient(pipe.x, 0, pipe.x + pipe.width, 0);
+                pipeGrad.addColorStop(0, '#00b4d8');
+                pipeGrad.addColorStop(0.3, '#90e0ef');
+                pipeGrad.addColorStop(0.7, '#0077b6');
+                pipeGrad.addColorStop(1, '#03045e');
+
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#caf0f8';
+
+                // TOP PIPE DRAW
+                ctx.save();
+                ctx.fillStyle = pipeGrad;
+                ctx.shadowColor = '#00f5ff';
+                ctx.shadowBlur = 8;
+                // Rounding the top pipe lip beautifully
+                ctx.beginPath();
+                ctx.roundRect(pipe.x, 0, pipe.width, pipe.topHeight - 25, [0, 0, 8, 8]);
+                ctx.fill();
+                ctx.stroke();
+
+                // Top Pipe Lip (Cap)
+                ctx.beginPath();
+                ctx.roundRect(pipe.x - 4, pipe.topHeight - 25, pipe.width + 8, 25, 6);
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+
+                // BOTTOM PIPE DRAW
+                ctx.save();
+                ctx.fillStyle = pipeGrad;
+                ctx.shadowColor = '#00f5ff';
+                ctx.shadowBlur = 8;
+                // Bottom Pipe Lip (Cap)
+                ctx.beginPath();
+                ctx.roundRect(pipe.x - 4, pipe.bottomY, pipe.width + 8, 25, 6);
+                ctx.fill();
+                ctx.stroke();
+
+                // Bottom Pipe Body
+                ctx.beginPath();
+                ctx.roundRect(pipe.x, pipe.bottomY + 25, pipe.width, V_HEIGHT - pipe.bottomY - 25, [8, 8, 0, 0]);
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+            });
+
+            // 6. DRAW PARTICLES (Trails & Sparkles)
+            particles.forEach(p => {
+                ctx.save();
+                ctx.globalAlpha = p.alpha;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                if (p.type === 'spark') {
+                    drawSparkleStar(ctx, p.x, p.y, 4, p.size, p.size / 2, p.color);
+                } else {
+                    // Soft circular drift bubbles
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            });
+
+            // --- STREAMING_CHUNK: Drawing the gorgeous Animated Custom Bird ---
+            // 7. DRAW BIRD WITH SELECTED SKIN AND ANIMATED WINGS
+            ctx.save();
+            ctx.translate(bird.x, bird.y);
+            ctx.rotate(bird.rotation);
+
+            const activeSkin = SKINS[selectedSkinIndex];
+
+            // Glow/shadow effect
+            ctx.shadowColor = activeSkin.color;
+            ctx.shadowBlur = 15;
+
+            // MAIN BODY (Soft cartoon egg shape)
+            ctx.fillStyle = activeSkin.color;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, bird.radius + 3, bird.radius, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.lineWidth = 2.5;
+            ctx.strokeStyle = '#ffffff';
+            ctx.stroke();
+
+            // SHINY BEAK
+            ctx.fillStyle = '#ff6b35';
+            ctx.beginPath();
+            ctx.moveTo(bird.radius - 2, -6);
+            ctx.lineTo(bird.radius + 12, -1);
+            ctx.lineTo(bird.radius - 1, 4);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // CUTE BIG ANIME EYE
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(6, -4, 7, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // PUPIL
+            ctx.fillStyle = activeSkin.eyeColor;
+            ctx.beginPath();
+            ctx.arc(8, -4, 3.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // EYE SHINE
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(9.5, -5.5, 1.2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // FLAPPING FLUFFY WING
+            ctx.shadowBlur = 0; // turn off shadow for wing border clarity
+            ctx.fillStyle = activeSkin.wingColor;
+            ctx.save();
+            ctx.translate(-5, 1);
+            // Flap rotation calculation
+            const wingFlapRotation = Math.sin(bird.wingPhase) * 0.75;
+            ctx.rotate(wingFlapRotation);
+            
+            ctx.beginPath();
+            ctx.ellipse(-6, 0, 11, 7, -0.2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+
+            // CUTE CHEEK BLUSH
+            ctx.fillStyle = 'rgba(255, 100, 100, 0.5)';
+            ctx.beginPath();
+            ctx.arc(4, 3, 3.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+
+            // 8. GROUND SURFACE BAR WITH BLUE GLOW
+            const groundGrad = ctx.createLinearGradient(0, V_HEIGHT - 40, 0, V_HEIGHT);
+            groundGrad.addColorStop(0, '#001d3d');
+            groundGrad.addColorStop(1, '#000814');
+
+            ctx.fillStyle = groundGrad;
+            ctx.beginPath();
+            ctx.roundRect(0, V_HEIGHT - 40, V_WIDTH, 40, [15, 15, 0, 0]);
+            ctx.fill();
+
+            ctx.strokeStyle = '#00f5ff';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(0, V_HEIGHT - 40);
+            ctx.lineTo(V_WIDTH, V_HEIGHT - 40);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        // --- STREAMING_CHUNK: Game control state transitions ---
+        function startGame() {
+            gameState = 'PLAYING';
+            score = 0;
+            frameCount = 0;
+            bird.y = 350;
+            bird.velocity = 0;
+            pipes = [];
+            particles = [];
+            
+            audio.init();
+            updateScoresUI();
+
+            // Dynamic menus hiding
+            document.getElementById('startMenu').classList.add('hidden');
+            document.getElementById('gameOverMenu').classList.add('hidden');
+            document.getElementById('hud').classList.remove('opacity-0');
+            document.getElementById('footerHint').classList.add('opacity-0');
+
+            // Trigger visual splash of start sparks
+            for (let i = 0; i < 20; i++) {
+                particles.push({
+                    x: bird.x,
+                    y: bird.y,
+                    vx: (Math.random() - 0.5) * 8,
+                    vy: (Math.random() - 0.5) * 8,
+                    alpha: 1,
+                    size: Math.random() * 5 + 3,
+                    color: '#90e0ef',
+                    type: 'spark'
+                });
+            }
+        }
+
+        function triggerGameOver() {
+            if (gameState === 'GAMEOVER') return;
+            gameState = 'GAMEOVER';
+            audio.playHit();
+
+            // Update local storage high scores
+            let justUnlocked = false;
+            if (score > bestScoreVal) {
+                bestScoreVal = score;
+                localStorage.setItem('sparkle_high_score', bestScoreVal);
+            }
+
+            // Check if user reached skin unlock thresholds on this run
+            SKINS.forEach(s => {
+                if (score >= s.req && s.req > 0) {
+                    // Give a cute notice if they achieved a high limit
+                    justUnlocked = true;
+                }
+            });
+
+            // Update UI
+            document.getElementById('hud').classList.add('opacity-0');
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('finalBest').textContent = bestScoreVal;
+            document.getElementById('gameOverMenu').classList.remove('hidden');
+            document.getElementById('unlockNotice').classList.toggle('hidden', !justUnlocked);
+
+            // Give a cool cartoon medal based on score
+            const medalContainer = document.getElementById('medalContainer');
+            if (score >= 30) {
+                medalContainer.innerHTML = `<span class="text-6xl drop-shadow">👑</span><p class="text-xs text-yellow-300 font-bold mt-1">GOLDEN KING</p>`;
+            } else if (score >= 15) {
+                medalContainer.innerHTML = `<span class="text-6xl drop-shadow">🥈</span><p class="text-xs text-slate-300 font-bold mt-1">SUPER SILVER</p>`;
+            } else if (score >= 5) {
+                medalContainer.innerHTML = `<span class="text-6xl drop-shadow">🥉</span><p class="text-xs text-amber-600 font-bold mt-1">BRONZE NOVICE</p>`;
+            } else {
+                medalContainer.innerHTML = `<span class="text-6xl drop-shadow">🥚</span><p class="text-xs text-cyan-400 font-bold mt-1">UNHATCHED</p>`;
+            }
+
+            // Redraw skin selectors to see new unlocks
+            renderSkinSelector();
+        }
+
+        function returnToMenu() {
+            gameState = 'START';
+            document.getElementById('gameOverMenu').classList.add('hidden');
+            document.getElementById('startMenu').classList.remove('hidden');
+            document.getElementById('hud').classList.add('opacity-0');
+            document.getElementById('footerHint').classList.remove('opacity-0');
+            initBackgroundElements();
+        }
+
+        // Handle Flap Actions
+        function performFlap() {
+            if (gameState === 'PLAYING') {
+                bird.velocity = JUMP_FORCE;
+                audio.playJump();
+                
+                // Add jump dust particles
+                for (let i = 0; i < 5; i++) {
+                    particles.push({
+                        x: bird.x - 5,
+                        y: bird.y + 10,
+                        vx: -1 - Math.random() * 2,
+                        vy: (Math.random() - 0.5) * 4,
+                        alpha: 0.8,
+                        size: Math.random() * 5 + 2,
+                        color: 'rgba(255, 255, 255, 0.8)',
+                        type: 'wing'
+                    });
+                }
+            } else if (gameState === 'START') {
+                startGame();
+            }
+        }
+
+        // --- STREAMING_CHUNK: Populating custom Skins and dynamic interface adjustments ---
+        function renderSkinSelector() {
+            const container = document.getElementById('skinSelector');
+            container.innerHTML = '';
+
+            SKINS.forEach((skin, index) => {
+                const isLocked = bestScoreVal < skin.req;
+                const isSelected = selectedSkinIndex === index;
+
+                const button = document.createElement('button');
+                button.className = `relative flex flex-col items-center justify-center p-2 rounded-xl transition-all border ${
+                    isSelected 
+                    ? 'bg-blue-600 border-cyan-300 scale-105 shadow-md' 
+                    : isLocked 
+                        ? 'bg-slate-950/40 border-slate-800 opacity-60' 
+                        : 'bg-blue-900/40 border-blue-800/60 hover:bg-blue-800/50'
+                }`;
+
+                if (isLocked) {
+                    button.disabled = true;
+                    button.innerHTML = `
+                        <span class="text-lg filter grayscale">🔒</span>
+                        <span class="text-[9px] text-red-300 mt-1 font-bold">Best: ${skin.req}</span>
+                    `;
+                } else {
+                    button.innerHTML = `
+                        <span class="text-2xl">${skin.emoji}</span>
+                        <span class="text-[9px] font-bold text-slate-100 truncate w-full text-center mt-1">${skin.name.split(' ')[0]}</span>
+                    `;
+                    button.addEventListener('click', () => {
+                        selectedSkinIndex = index;
+                        audio.playJump();
+                        renderSkinSelector();
+                    });
+                }
+                container.appendChild(button);
+            });
+        }
+
+        function updateScoresUI() {
+            document.getElementById('currentScore').textContent = score;
+            document.getElementById('bestScore').textContent = bestScoreVal;
+        }
+
+        // --- INPUT EVENT HANDLING ---
+        // Space / Keyboard trigger
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                performFlap();
+            }
+        });
+
+        // Direct interactive Canvas tap or mouse-click
+        canvas.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            performFlap();
+        });
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            performFlap();
+        }, { passive: false });
+
+        // Action Trigger Controls
+        document.getElementById('playBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            startGame();
+        });
+        document.getElementById('restartBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            startGame();
+        });
+        document.getElementById('homeBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            returnToMenu();
+        });
+
+        // Loop Runner setup
+        function mainLoop() {
+            updatePhysics();
+            drawGame();
+            requestAnimationFrame(mainLoop);
+        }
+
+        window.onload = function() {
+            mainLoop();
+        };
+
+    </script>
+</body>
+</html>

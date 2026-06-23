@@ -1,0 +1,6 @@
+{
+  "name": "Cozy Retro Arcade Chess",
+  "description": "A minimalist, cute Chess experience in pastel tones with dual clocks, floating announcer pop-ups, colorless trophy bars, and local LM Studio Gemma-4 opponent support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

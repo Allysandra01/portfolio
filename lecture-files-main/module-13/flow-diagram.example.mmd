@@ -1,0 +1,15 @@
+flowchart TD
+    A[Email arrives at feedback@] --> B{Subject starts with [feedback]?}
+    B -- no --> X1[Drop to /dev/null]
+    B -- yes --> C[Read email body]
+    C --> D[Ollama ask: triage prompt]
+    D --> E{Parse JSON ok?}
+    E -- no --> X2[Log to audit/failures.jsonl]
+    E -- yes --> F{Urgency?}
+    F -- high --> G[Post to #feedback-triage with [urgent] + @bootcamp-pm]
+    F -- medium --> H[Post to #feedback-triage]
+    F -- low --> I[Append to data/feedback-queue.jsonl]
+    G --> J[Append to audit/feedback.jsonl]
+    H --> J
+    I --> J
+    J --> K[Done]

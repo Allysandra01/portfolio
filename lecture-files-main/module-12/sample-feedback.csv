@@ -1,0 +1,31 @@
+response_id,date,role,site,sentiment,theme,satisfaction,verbatim
+F-4001,2026-05-02,Teacher,Luzon,Positive,Materials,5,The facilitator was patient when we got stuck on Ollama.
+F-4002,2026-05-02,Teacher,Visayas,Neutral,Pace,3,The pace was fine on Day 1 but Day 2 felt rushed.
+F-4003,2026-05-03,Coordinator,Luzon,Positive,Materials,4,The fixtures were realistic. I could re-use them at work.
+F-4004,2026-05-03,Manager,Mindanao,Negative,Pace,2,Day 3 had too much new content for one afternoon.
+F-4005,2026-05-04,Teacher,Visayas,Positive,Facilitator,5,Mark explains the why before the how. That changed how I read the slides.
+F-4006,2026-05-04,Coordinator,Luzon,Neutral,Logistics,3,Lunch could have been earlier.
+F-4007,2026-05-05,Manager,Mindanao,Positive,Pace,4,I liked that the schedule had a buffer after lunch.
+F-4008,2026-05-05,Teacher,Visayas,Negative,Materials,2,More sample data please. The three CSVs were not enough.
+F-4009,2026-05-06,Coordinator,Luzon,Positive,Facilitator,5,Best facilitation I have attended in two years.
+F-4010,2026-05-06,Manager,Mindanao,Neutral,Logistics,3,Wi-Fi kept dropping in Module 11. I know that was on purpose but it was still stressful.
+F-4011,2026-05-07,Teacher,Visayas,Positive,Materials,4,The policy fixture was something I actually had to read at my agency.
+F-4012,2026-05-07,Coordinator,Luzon,Neutral,Pace,3,Module 12 needed more time. Or maybe a stretch goal to keep fast finishers busy.
+F-4013,2026-05-08,Manager,Mindanao,Positive,Facilitator,5,The decision matrix module changed how I brief my team.
+F-4014,2026-05-08,Teacher,Visayas,Negative,Logistics,2,The room was too cold on Day 4.
+F-4015,2026-05-09,Coordinator,Luzon,Positive,Pace,4,Loved the strict timers on the share-outs.
+F-4016,2026-05-09,Manager,Mindanao,Positive,Materials,4,I will reuse the SWOT rubric for our Q3 review.
+F-4017,2026-05-10,Teacher,Visayas,Neutral,Facilitator,3,More time for Q&A please.
+F-4018,2026-05-10,Coordinator,Luzon,Positive,Pace,5,The day 3 reflection template actually helped me think.
+F-4019,2026-05-11,Manager,Mindanao,Neutral,Materials,3,The fixtures were English only. Filipino examples would help.
+F-4020,2026-05-11,Teacher,Visayas,Positive,Facilitator,5,I am taking the taste skill back to my team.
+F-4021,2026-05-12,Coordinator,Luzon,Positive,Logistics,4,The room change on Day 3 was handled smoothly.
+F-4022,2026-05-12,Manager,Mindanao,Negative,Pace,2,Day 4 had too many breaks. Felt like the day never got going.
+F-4023,2026-05-13,Teacher,Visayas,Positive,Materials,4,The flow-spec template is now part of how we document automations.
+F-4024,2026-05-13,Coordinator,Luzon,Neutral,Facilitator,3,Would love a 30-minute alumni session next quarter.
+F-4025,2026-05-14,Manager,Mindanao,Positive,Pace,5,The five-day shape made the work feel doable.
+F-4026,2026-05-14,Teacher,Visayas,Positive,Materials,5,The FAQ docs in Module 12 are gold. We use them in our help desk now.
+F-4027,2026-05-15,Coordinator,Luzon,Neutral,Logistics,3,The schedule was posted late on Day 2.
+F-4028,2026-05-15,Manager,Mindanao,Positive,Facilitator,5,Mark is the rare facilitator who actually reads the room.
+F-4029,2026-05-16,Teacher,Visayas,Negative,Materials,2,Need a beginner track. Some of us have never used a terminal.
+F-4030,2026-05-16,Coordinator,Luzon,Positive,Pace,4,The pair loops in Module 7 turned a boring summary into a real conversation.

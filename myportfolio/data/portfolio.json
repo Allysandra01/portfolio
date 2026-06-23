@@ -141,5 +141,46 @@
       "author": "Maria Garcia",
       "role": "Lead Designer, WebAgency Pro"
     }
-  ]
+  ],
+  "collaborators": [
+    {
+      "name": "Mia Santos",
+      "initials": "MS",
+      "role": "Design Mentor",
+      "note": "Provided strategic guidance on visual hierarchy and accessibility across interface patterns.",
+      "image": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=640&q=80"
+    },
+    {
+      "name": "Carlos Reyes",
+      "initials": "CR",
+      "role": "Development Partner",
+      "note": "Collaborated on responsive layouts, performance tuning, and cross-browser polish.",
+      "image": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=640&q=80"
+    },
+    {
+      "name": "Tasha Lim",
+      "initials": "TL",
+      "role": "Product Advisor",
+      "note": "Helped validate user flows and improve the overall experience for client handoff.",
+      "image": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=640&q=80"
+    },
+    {
+      "name": "Eric Tan",
+      "initials": "ET",
+      "role": "Accessibility Specialist",
+      "note": "Reviewed interactions and helped ensure screen reader clarity and keyboard support.",
+      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=640&q=80"
+    }
+  ],
+  "projectSelection": {
+    "projects": {
+      "Layout Designing": ["Poster", "Infographics", "FB Layout post", "Template"],
+      "UI/UX Web": ["Emerald Nebula Theme", "Glassmorphic Dashboard", "Gamified Dark Mode", "Minimalist Tech Portfolio"],
+      "Video Editing": ["Funny", "Meme", "Cinematography", "Music video", "Small Projects", "Vlog"],
+      "Music Production": ["Kpop", "Tagalog", "English", "Pop", "R & B", "Classical", "Ballad"],
+      "Writing Story": ["Creative Scripting", "Concept Outlining", "Game Lore Documentation"],
+      "Web Development": ["BrgyHub Template", "Community Portal", "ScholarQuest Platform"],
+      "Application Development": ["Cross-Platform Mobile App", "Sentri-Fowl Controller UI"]
+    }
+  }
 }
