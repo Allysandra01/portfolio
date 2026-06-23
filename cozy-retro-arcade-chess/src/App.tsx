@@ -6,15 +6,15 @@ import { AIConfig, AIConfigState } from './components/AIConfig';
 import { audio } from './utils/audio';
 import { getBestMove } from './utils/chessEngine';
 import { Piece } from './components/Piece';
-import { 
-  Play, 
-  RotateCcw, 
-  Pause, 
-  Volume2, 
-  VolumeX, 
-  Sparkles, 
-  User, 
-  Cpu, 
+import {
+  Play,
+  RotateCcw,
+  Pause,
+  Volume2,
+  VolumeX,
+  Sparkles,
+  User,
+  Cpu,
   HelpCircle,
   Clock,
   Coins
@@ -42,12 +42,12 @@ const safeStorage = {
   setItem: (key: string, value: string): void => {
     try {
       localStorage.setItem(key, value);
-    } catch {}
+    } catch { }
   },
   removeItem: (key: string): void => {
     try {
       localStorage.removeItem(key);
-    } catch {}
+    } catch { }
   }
 };
 
@@ -69,7 +69,7 @@ export default function App() {
           winningStreak: parsed.winningStreak ?? 0,
           highestStreak: parsed.highestStreak ?? 0
         };
-      } catch {}
+      } catch { }
     }
     return { wins: 0, losses: 0, draws: 0, winningStreak: 0, highestStreak: 0 };
   });
@@ -78,12 +78,12 @@ export default function App() {
     const saved = safeStorage.getItem('arcade_ai_config');
     let parsed: any = {};
     if (saved) {
-      try { parsed = JSON.parse(saved); } catch {}
+      try { parsed = JSON.parse(saved); } catch { }
     }
     return {
       engine: parsed.engine || 'built-in',
       lmStudioUrl: parsed.lmStudioUrl || 'http://localhost:1234',
-      lmStudioModel: parsed.lmStudioModel || 'gemma-4',
+      lmStudioModel: parsed.lmStudioModel || 'qwen/qwen3-vl-4b',
       minimaxDepth: parsed.minimaxDepth || 2,
       geminiModel: parsed.geminiModel || 'gemini-2.5-flash',
       difficulty: parsed.difficulty || 'intermediate',
@@ -223,7 +223,7 @@ Response MUST be a JSON object:
   const playSoundSafe = (action: () => void) => {
     try {
       action();
-    } catch {}
+    } catch { }
   };
 
   // Insert Coin
@@ -236,10 +236,10 @@ Response MUST be a JSON object:
   // Setup/Trigger animated move phrases
   const triggerMovePopup = (move: any) => {
     const pieceType = move.piece === 'p' ? 'Pawn' :
-                    move.piece === 'n' ? 'Knight' :
-                    move.piece === 'b' ? 'Bishop' :
-                    move.piece === 'r' ? 'Rook' :
-                    move.piece === 'q' ? 'Queen' : 'King';
+      move.piece === 'n' ? 'Knight' :
+        move.piece === 'b' ? 'Bishop' :
+          move.piece === 'r' ? 'Rook' :
+            move.piece === 'q' ? 'Queen' : 'King';
 
     if (move.flags.includes('k')) {
       addPopup('King castles kingside! Charming!');
@@ -252,10 +252,10 @@ Response MUST be a JSON object:
 
     if (move.captured) {
       const captType = move.captured === 'p' ? 'Pawn' :
-                       move.captured === 'n' ? 'Knight' :
-                       move.captured === 'b' ? 'Bishop' :
-                       move.captured === 'r' ? 'Rook' :
-                       move.captured === 'q' ? 'Queen' : 'King';
+        move.captured === 'n' ? 'Knight' :
+          move.captured === 'b' ? 'Bishop' :
+            move.captured === 'r' ? 'Rook' :
+              move.captured === 'q' ? 'Queen' : 'King';
       const captPhrases = [
         `${pieceType} bonks ${captType}!`,
         `${pieceType} captures ${captType}!`,
@@ -628,7 +628,7 @@ Response MUST be a JSON object:
   // Primary AI Engine query routine
   const triggerAiMove = async (currGame: Chess) => {
     setIsAiThinking(true);
-    
+
     const legalMoves = currGame.moves({ verbose: true }).map(m => {
       const prom = m.promotion ? m.promotion : '';
       return `${m.from}${m.to}${prom}`;
@@ -651,10 +651,10 @@ Response MUST be a JSON object:
           setIsAiThinking(false);
         }
       }, 700);
-    } 
+    }
     else if (aiConfig.engine === 'lmstudio') {
       addLog('sent', `Connecting to LM Studio Gemma 4 at http://localhost:1234/v1/chat/completions ...`);
-      
+
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 12000);
@@ -740,7 +740,7 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
         addLog('error', `LM Studio Server offline at ${aiConfig.lmStudioUrl}. Initiating local CPU fallback solver.`);
         triggerFallbackLocalMove(currGame, `Endpoint offline.`);
       }
-    } 
+    }
     else if (aiConfig.engine === 'gemini') {
       addLog('sent', `Querying cloud router proxy with FEN: ${currentFen}...`);
       try {
@@ -829,14 +829,14 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
     });
 
     return { w: capturedW, b: capturedB }; // w is captured white (black's losses), b is captured black (white's losses)
-  };  const captured = getCapturedState();
+  }; const captured = getCapturedState();
 
   const isWhiteActive = game.turn() === 'w' && gameActive && !isPaused && !game.isGameOver() && !forfeitPlayer;
   const isBlackActive = game.turn() === 'b' && gameActive && !isPaused && !game.isGameOver() && !forfeitPlayer;
 
   // Configure dynamic styling based on active theme for perfect contrast
   const getThemeStyle = () => {
-    switch(theme) {
+    switch (theme) {
       case 'galaxy':
         return {
           wrapper: "min-h-screen bg-[#070314] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1a0e38] via-[#090514] to-[#010003] text-[#e3dcff] select-none p-4 md:p-6 flex flex-col justify-between transition-all duration-300",
@@ -1012,13 +1012,12 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
     <div className={style.wrapper}>
       {/* Toast Celebrate Notifications Popup */}
       {toast && (
-        <div 
+        <div
           key={toast.id}
-          className={`fixed top-4 right-4 z-55 max-w-sm p-4 rounded-2xl border-2 shadow-2xl flex items-start gap-3 animate-slideInFromRight select-none ${
-            theme === 'galaxy'
+          className={`fixed top-4 right-4 z-55 max-w-sm p-4 rounded-2xl border-2 shadow-2xl flex items-start gap-3 animate-slideInFromRight select-none ${theme === 'galaxy'
               ? 'bg-[#150d30]/95 border-[#c582ff] text-white shadow-[#523e8c]/50'
               : 'bg-white border-[#fec5bb] text-neutral-800 shadow-md'
-          }`}
+            }`}
         >
           <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 text-base">
             ✨
@@ -1102,12 +1101,12 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
 
       {/* Main Dual-Panel Layout */}
       <div className="max-w-6xl w-full mx-auto flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
+
         {/* Left Panel: Flanked Chessboard Workspace (7 Columns) */}
         <section className="lg:col-span-7 flex flex-col gap-4">
-          
+
           <div className={style.boardCard}>
-            
+
             {/* Top Side: GEMMA AI Profile (Black Pieces) */}
             <div className={style.gemmaProfile}>
               <div className="flex items-center gap-2.5">
@@ -1119,7 +1118,7 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                     <span className={`text-xs font-bold ${theme === 'galaxy' ? 'text-[#ecdfff]' : 'text-[#590d22]'}`}>Gemma 4 Opponent (Black)</span>
                     <span className="text-[10px] bg-[#ffe5ec] text-[#d90429] font-mono px-1.5 py-0.2 rounded-full font-bold">ARCADE</span>
                   </div>
-                  
+
                   {/* Grayscale Colorless Defeated Trophies representing Black's captured pieces (White pieces) */}
                   <div className="flex items-center gap-1 mt-1 shrink-0">
                     <span className={`text-[9px] font-bold uppercase mr-1 ${theme === 'galaxy' ? 'text-[#caaffc]' : 'text-[#ffb3c1]'}`}>Trophies:</span>
@@ -1139,10 +1138,9 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
               </div>
 
               {/* Black Timer Block */}
-              <div 
-                className={`py-1.5 px-3 rounded-lg border-2 font-mono text-center shrink-0 min-w-[100px] transition-cozy ${
-                  isBlackActive ? style.clockActiveBlack : style.clockInactiveBlack
-                }`}
+              <div
+                className={`py-1.5 px-3 rounded-lg border-2 font-mono text-center shrink-0 min-w-[100px] transition-cozy ${isBlackActive ? style.clockActiveBlack : style.clockInactiveBlack
+                  }`}
               >
                 <div className={`text-[9px] font-black uppercase text-center block ${theme === 'galaxy' ? 'text-[#caaffc]' : 'text-[#ff7b90]'}`}>CLOCK</div>
                 {isAiThinking && game.turn() === 'b' ? (
@@ -1170,15 +1168,14 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                 </div>
               ) : (
                 /* GORGEOUS RETRO CABINET MODE SELECTION SCREEN */
-                <div className={`w-full max-w-[440px] flex flex-col justify-between p-5 border-4 rounded-3xl shadow-2xl transition-all duration-300 overflow-y-auto custom-scrollbar select-none ${
-                  theme === 'galaxy' 
-                    ? 'bg-[#150d30] border-[#814df2] text-white shadow-[#523e8c]/40' 
-                    : theme === 'neon' 
-                    ? 'bg-[#fdf0f5] border-[#f4b5cc] text-[#590d22] shadow-[#ffcad4]/50'
-                    : theme === 'light'
-                    ? 'bg-neutral-50/95 border-[#cbd5e1] text-neutral-800 shadow-neutral-200'
-                    : 'bg-[#fafcf7] border-[#95d5b2] text-[#1b4332] shadow-[#b7e4c7]/40'
-                }`}>
+                <div className={`w-full max-w-[440px] flex flex-col justify-between p-5 border-4 rounded-3xl shadow-2xl transition-all duration-300 overflow-y-auto custom-scrollbar select-none ${theme === 'galaxy'
+                    ? 'bg-[#150d30] border-[#814df2] text-white shadow-[#523e8c]/40'
+                    : theme === 'neon'
+                      ? 'bg-[#fdf0f5] border-[#f4b5cc] text-[#590d22] shadow-[#ffcad4]/50'
+                      : theme === 'light'
+                        ? 'bg-neutral-50/95 border-[#cbd5e1] text-neutral-800 shadow-neutral-200'
+                        : 'bg-[#fafcf7] border-[#95d5b2] text-[#1b4332] shadow-[#b7e4c7]/40'
+                  }`}>
                   {/* Title Bar */}
                   <div className="text-center pb-2 border-b-2 border-dashed border-current/20 flex flex-col items-center">
                     <span className="text-2xl animate-bounce">🕹️</span>
@@ -1202,13 +1199,12 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                             playSoundSafe(() => audio.select());
                             setLobbyMode('computer');
                           }}
-                          className={`py-2 px-3 rounded-xl border-2 font-mono text-[10px] font-bold flex flex-col items-center gap-1 transition-all duration-250 ${
-                            lobbyMode === 'computer'
+                          className={`py-2 px-3 rounded-xl border-2 font-mono text-[10px] font-bold flex flex-col items-center gap-1 transition-all duration-250 ${lobbyMode === 'computer'
                               ? theme === 'galaxy'
                                 ? 'bg-[#523e8c] border-[#caaffc] text-white shadow-md'
                                 : 'bg-[#eafaf1] border-[#1b4332] text-[#1b4332] font-black shadow-md'
                               : 'bg-white/45 border-transparent opacity-65 hover:opacity-90'
-                          }`}
+                            }`}
                         >
                           <span className="text-base">🤖</span>
                           <span>VS COMPUTER</span>
@@ -1219,13 +1215,12 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                             playSoundSafe(() => audio.select());
                             setLobbyMode('local');
                           }}
-                          className={`py-2 px-3 rounded-xl border-2 font-mono text-[10px] font-bold flex flex-col items-center gap-1 transition-all duration-250 ${
-                            lobbyMode === 'local'
+                          className={`py-2 px-3 rounded-xl border-2 font-mono text-[10px] font-bold flex flex-col items-center gap-1 transition-all duration-250 ${lobbyMode === 'local'
                               ? theme === 'galaxy'
                                 ? 'bg-[#523e8c] border-[#caaffc] text-white shadow-md'
                                 : 'bg-[#eafaf1] border-[#1b4332] text-[#1b4332] font-black shadow-md'
                               : 'bg-white/45 border-transparent opacity-65 hover:opacity-90'
-                          }`}
+                            }`}
                         >
                           <span className="text-base">👥</span>
                           <span>1vs1 LOCAL</span>
@@ -1246,11 +1241,10 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                                 playSoundSafe(() => audio.select());
                                 setLobbyDifficulty('easy');
                               }}
-                              className={`py-1.5 rounded-lg border text-center transition-all ${
-                                lobbyDifficulty === 'easy'
+                              className={`py-1.5 rounded-lg border text-center transition-all ${lobbyDifficulty === 'easy'
                                   ? 'bg-[#fef3c7] border-amber-400 text-amber-950 font-black'
                                   : 'bg-white/45 border-transparent opacity-65'
-                              }`}
+                                }`}
                             >
                               🍦 EASY (30🪙)
                             </button>
@@ -1260,11 +1254,10 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                                 playSoundSafe(() => audio.select());
                                 setLobbyDifficulty('intermediate');
                               }}
-                              className={`py-1.5 rounded-lg border text-center transition-all ${
-                                lobbyDifficulty === 'intermediate'
+                              className={`py-1.5 rounded-lg border text-center transition-all ${lobbyDifficulty === 'intermediate'
                                   ? 'bg-[#d1fae5] border-emerald-400 text-emerald-950 font-black'
                                   : 'bg-white/45 border-transparent opacity-65'
-                              }`}
+                                }`}
                             >
                               ⚡ MEDIUM (60🪙)
                             </button>
@@ -1274,11 +1267,10 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                                 playSoundSafe(() => audio.select());
                                 setLobbyDifficulty('hard');
                               }}
-                              className={`py-1.5 rounded-lg border text-center transition-all ${
-                                lobbyDifficulty === 'hard'
+                              className={`py-1.5 rounded-lg border text-center transition-all ${lobbyDifficulty === 'hard'
                                   ? 'bg-[#fee2e2] border-rose-400 text-rose-950 font-black'
                                   : 'bg-white/45 border-transparent opacity-65'
-                              }`}
+                                }`}
                             >
                               🔥 HARD (100🪙)
                             </button>
@@ -1295,11 +1287,10 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                                 playSoundSafe(() => audio.select());
                                 setLobbyColor('w');
                               }}
-                              className={`py-1.5 rounded-lg border flex items-center justify-center gap-1.5 transition-all ${
-                                lobbyColor === 'w'
+                              className={`py-1.5 rounded-lg border flex items-center justify-center gap-1.5 transition-all ${lobbyColor === 'w'
                                   ? 'bg-neutral-100 border-neutral-700 text-neutral-900 font-extrabold'
                                   : 'bg-white/45 border-transparent opacity-65'
-                              }`}
+                                }`}
                             >
                               <span className="w-2.5 h-2.5 rounded-full bg-white border border-neutral-400" />
                               WHITE (GO FIRST)
@@ -1310,11 +1301,10 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                                 playSoundSafe(() => audio.select());
                                 setLobbyColor('b');
                               }}
-                              className={`py-1.5 rounded-lg border flex items-center justify-center gap-1.5 transition-all ${
-                                lobbyColor === 'b'
+                              className={`py-1.5 rounded-lg border flex items-center justify-center gap-1.5 transition-all ${lobbyColor === 'b'
                                   ? 'bg-neutral-950 border-neutral-800 text-white font-extrabold'
                                   : 'bg-white/45 border-transparent opacity-65'
-                              }`}
+                                }`}
                             >
                               <span className="w-2.5 h-2.5 rounded-full bg-black border border-neutral-750" />
                               BLACK (GO SECOND)
@@ -1332,11 +1322,10 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                               playSoundSafe(() => audio.select());
                               setLobbyEngine(e.target.value as any);
                             }}
-                            className={`w-full py-1 px-2.5 rounded-lg text-[9px] font-mono font-bold uppercase transition-all shadow-sm ${
-                              theme === 'galaxy'
+                            className={`w-full py-1 px-2.5 rounded-lg text-[9px] font-mono font-bold uppercase transition-all shadow-sm ${theme === 'galaxy'
                                 ? 'bg-[#1c123d] text-[#caaffc] border-[#523e8c]'
                                 : 'bg-white border-neutral-200 text-[#3d5a5a]'
-                            }`}
+                              }`}
                           >
                             <option value="built-in">🟢 Built-in MiniMax CPU (Offline)</option>
                             <option value="gemini">🌌 Gemini Cloud Model Proxy (Online)</option>
@@ -1357,11 +1346,10 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                       <button
                         type="button"
                         onClick={handleLaunchMatch}
-                        className={`cursor-pointer w-full text-center py-3 rounded-2xl font-mono text-[11px] font-black uppercase transition-all active:scale-95 flex items-center justify-center gap-2 border-2 ${
-                          theme === 'galaxy'
+                        className={`cursor-pointer w-full text-center py-3 rounded-2xl font-mono text-[11px] font-black uppercase transition-all active:scale-95 flex items-center justify-center gap-2 border-2 ${theme === 'galaxy'
                             ? 'bg-[#c582ff] hover:bg-[#b061ff] text-[#150d30] border-white shadow-[0_0_15px_rgba(197,130,255,0.6)]'
                             : 'bg-[#ffcad4] hover:bg-[#ffb3c1] text-[#590d22] border-white shadow-md'
-                        }`}
+                          }`}
                       >
                         🕹️ START ARCADE BATTLE (-1 COIN)
                       </button>
@@ -1449,10 +1437,9 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
               </div>
 
               {/* White Timer Block */}
-              <div 
-                className={`py-1.5 px-3 rounded-lg border-2 font-mono text-center shrink-0 min-w-[100px] transition-cozy ${
-                  isWhiteActive ? style.clockActiveWhite : style.clockInactiveWhite
-                }`}
+              <div
+                className={`py-1.5 px-3 rounded-lg border-2 font-mono text-center shrink-0 min-w-[100px] transition-cozy ${isWhiteActive ? style.clockActiveWhite : style.clockInactiveWhite
+                  }`}
               >
                 <div className={`text-[9px] font-black uppercase text-center block ${theme === 'galaxy' ? 'text-[#caaffc]' : 'text-[#8fa89b]'}`}>CLOCK</div>
                 <span className={`${style.clockTextWhite} text-[16px] font-black font-mono block`}>
@@ -1500,7 +1487,7 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
           <div className={style.announcer}>
             {isAiThinking ? (
               <span className="flex items-center gap-2 text-[#ff7b90] animate-pulse font-black uppercase tracking-widest text-[11px]">
-                 ✨ Gemma 4 is thinking...
+                ✨ Gemma 4 is thinking...
               </span>
             ) : (
               <p className="leading-snug">
@@ -1513,7 +1500,7 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
 
         {/* Right Panel: Stats Ledger / Config Panel (5 Columns) */}
         <section className="lg:col-span-5 flex flex-col gap-4 self-stretch">
-          
+
           {/* Custom Tabs Navigation (DASHBOARD vs AI OPPONENT) */}
           <div className={style.tabContainer}>
             <button
@@ -1522,9 +1509,8 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                 playSoundSafe(() => audio.select());
                 setActiveTab('scores');
               }}
-              className={`flex-1 text-center py-2.5 rounded-lg transition-all duration-300 font-bold cursor-pointer ${
-                activeTab === 'scores' ? style.tabScoresActive : style.tabInactive
-              }`}
+              className={`flex-1 text-center py-2.5 rounded-lg transition-all duration-300 font-bold cursor-pointer ${activeTab === 'scores' ? style.tabScoresActive : style.tabInactive
+                }`}
             >
               📊 Stats Ledger
             </button>
@@ -1534,9 +1520,8 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
                 playSoundSafe(() => audio.select());
                 setActiveTab('cpu_rules');
               }}
-              className={`flex-1 text-center py-2.5 rounded-lg transition-all duration-300 font-bold cursor-pointer ${
-                activeTab === 'cpu_rules' ? style.tabCpuActive : style.tabInactive
-              }`}
+              className={`flex-1 text-center py-2.5 rounded-lg transition-all duration-300 font-bold cursor-pointer ${activeTab === 'cpu_rules' ? style.tabCpuActive : style.tabInactive
+                }`}
             >
               ⚙️ AI Opponent
             </button>
@@ -1571,7 +1556,7 @@ Do not include any extra thoughts, markdown formatting, HTML, or explanations ou
 
       {/* Retro bottom accessory floor row */}
       <footer className={`mt-6 max-w-6xl w-full mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 pt-4 border-t-2 ${theme === 'galaxy' ? 'border-[#3c2a68]' : 'border-[#eef3ee]'} items-center`}>
-        
+
         {/* Play Side setup */}
         <div className={style.footerItem}>
           <label htmlFor="play-side-chooser" className={style.footerLabel}>HUMAN SIDE:</label>
